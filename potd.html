@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Picture of the Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html {
+      font-family: Roboto Mono, monospace;
+      font-size: 14px;
+      line-height: 1.2em;
+      height: 100%;
+    }
+
+    body {
+      max-width: 768px;
+      margin: 1em auto;
+      color: var(--text-color);
+    }
+
+    h1 {
+      margin-bottom: 1em;
+    }
+
+    #navbar {
+      margin-bottom: 1.5em;
+    }
+
+    :root {
+      --text-color: #000000;
+      --link-color: #0000ee;
+    }
+
+    a,
+    a:visited {
+      color: var(--link-color);
+    }
+
+    a:active,
+    a:hover {
+      color: #fff;
+      background-color: var(--link-color);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-color: #eeeeee;
+        --link-color: #0392da;
+      }
+
+      body {
+        background: #000;
+        color: var(--text-color);
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar">
+    <a href="/">&larr; home</a>
+  </div>
+
+  <h1>Picture of the Day</h1>
+  <div id="potd"></div>
+
+  <script>
+    const images = [
+      "assets/potd/1.png",
+      "assets/potd/2.png",
+    ];
+
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+
+    const img = document.createElement("img");
+    img.src = randomImage;
+    img.alt = "Picture of the Day";
+
+    document.getElementById("potd").appendChild(img);
+  </script>
+</body>
+
+</html>

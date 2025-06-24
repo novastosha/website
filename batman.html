@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sajed's homepage</title>
+    <meta name="author" content="S. S.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="my homepage!">
+    <style>
+        img {
+            image-rendering: pixelated;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        html {
+            font-family: Roboto Mono, monospace;
+            font-size: 14px;
+            line-height: 1.2em;
+            height: 100%;
+        }
+
+        body {
+            max-width: 768px;
+            margin: 1em auto;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        li {
+            list-style-type: square;
+            list-style-position: inside;
+            margin-top: .25em;
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #navbar-links b:after {
+            content: "|";
+            margin: 0 .5rem;
+        }
+
+        #navbar-links b:last-child:after {
+            content: "";
+        }
+
+        :root {
+            --text-color: #000000;
+            --link-color: #0000ee;
+        }
+
+        a,
+        a:visited {
+            color: var(--link-color);
+        }
+
+        a:active,
+        a:hover {
+            color: #fff;
+            background-color: var(--link-color);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #eeeeee;
+                --link-color: #0392da;
+            }
+
+            body {
+                background: #000;
+                color: var(--text-color);
+            }
+
+            hr {
+                filter: brightness(.3);
+            }
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr {
+            font-size: 1em;
+            position: relative;
+            margin: 1em 0;
+        }
+
+        h1:first-child {
+            margin-top: 0;
+        }
+
+        h1:after {
+            content: "=================================================";
+            position: absolute;
+            left: 0;
+            top: 1em;
+        }
+
+        h1 {
+            padding-bottom: 1em;
+            overflow-x: hidden;
+        }
+
+        h2:before {
+            content: "### ";
+        }
+
+        .batman-text {
+            font-size: 2em;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div>
+            <h1>BATMAN!</h1>
+        </div>
+        <div id="navbar-links">
+            <b><a href="/">home</a></b>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function randomElement(array) { return array[Math.floor(Math.random() * array.length)]; }
+
+        const pictures = [["assets/batman/brucewayne.jpg", 640, 480], ["assets/batman/batman.jpg", 640, 480]];
+        const phrases = [
+            "You've been batman-ed!",
+            "Batman has got you once again!",
+            "I'm Batman.",
+            "The Dark Knight rises!",
+            "Holy Batmobile, Batman!",
+            "To the Batcave!"
+        ];
+
+        const selected_picture = randomElement(pictures);
+        const selected_phrase = randomElement(phrases);
+
+        function toHTML() {
+            var image = document.createElement("img");
+            image.src = selected_picture[0];
+            image.alt = selected_phrase;
+            image.width = selected_picture[1];
+            image.height = selected_picture[2];
+
+            var text = document.createElement("h2");
+            text.innerHTML = selected_phrase;
+            text.classList.add("batman-text");
+
+            return [image, text];
+        }
+
+        const htmlResult = toHTML();
+        document.body.appendChild(htmlResult[0]);
+        document.body.appendChild(htmlResult[1]);
+    </script>
+
+</body>
+
+</html>
