@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+        // Map of allowed destinations
+        const destMap = {
+            "default": "https://sajed.dev",
+            "pintrest": "https://uk.pinterest.com/slimani_sajed/"
+        };
+
+        // This function parses query parameters
+        function getParams() {
+            const params = {};
+            const queryString = window.location.search.slice(1);
+            for (const pair of queryString.split('&')) {
+                if (!pair) continue;
+                const [key, value] = pair.split('=').map(decodeURIComponent);
+                params[key] = value;
+            }
+            return params;
+        }
+
+        function getDestUrl() {
+            const params = getParams();
+            const destKey = params.dest || "default";
+            return destMap[destKey] || destMap["default"];
+        }
+
+        function performRedirect() {
+            const url = getDestUrl();
+            window.location.href = url;
+        }
+
+        window.onload = performRedirect;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const link = document.getElementById("manual-redirect-link");
+            if (link) {
+                link.href = getDestUrl();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <p>Redirecting... If you do not get redirected, please enable Javascript or <a id="manual-redirect-link" href="#">click here</a></p>
+</body>
+
+</html>
