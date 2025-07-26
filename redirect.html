@@ -121,13 +121,11 @@
     </style>
     <title>Redirecting...</title>
     <script>
-        // Map of allowed destinations
         const destMap = {
             "default": 'aHR0cHM6Ly9zYWplZC5kZXY=',
             "pintrest": 'aHR0cHM6Ly91ay5waW50ZXJlc3QuY29tL3NsaW1hbmlfc2FqZWQv',
         };
 
-        // This function parses query parameters
         function getParams() {
             const params = {};
             const queryString = window.location.search.slice(1);
@@ -141,8 +139,8 @@
 
         function getDestUrl() {
             const params = getParams();
-            const destKey = params.dest || "default";
-            return destMap[destKey] || destMap["default"];
+            const destKey = params.dest || params.to || params.d || "default";
+            return destMap[destKey];
         }
 
         function performRedirect() {
