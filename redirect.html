@@ -140,7 +140,7 @@
         function getDestUrl() {
             const params = getParams();
             const destKey = params.dest || params.to || params.d || "default";
-            return destMap[destKey];
+            return destMap[destKey] || destMap["default"];
         }
 
         function performRedirect() {
