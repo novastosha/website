@@ -122,8 +122,9 @@
     <title>Redirecting...</title>
     <script>
         const destMap = {
-            "default": 'aHR0cHM6Ly9zYWplZC5kZXY=',
-            "pintrest": 'aHR0cHM6Ly91ay5waW50ZXJlc3QuY29tL3NsaW1hbmlfc2FqZWQv',
+            // "name": ["display name", "encoded URL", display in body]
+            "default": ['bXkgaG9tZXBhZ2U=', 'aHR0cHM6Ly9zYWplZC5kZXY=', true],
+            "pintrest": ['bXkgcGludHJlc3Q=', 'aHR0cHM6Ly91ay5waW50ZXJlc3QuY29tL3NsaW1hbmlfc2FqZWQv', true],
         };
 
         function getParams() {
@@ -139,12 +140,16 @@
 
         function getDestUrl() {
             const params = getParams();
-            const destKey = params.dest || params.to || params.d || "default";
-            return destMap[destKey] || destMap["default"];
+            const destKey = params.dest || params.to || params.d || "none";
+            return destMap[destKey] || (destKey == "none" ? undefined : destMap["default"]);
         }
 
         function performRedirect() {
-            const url = atob(getDestUrl());
+            const destUrl = getDestUrl();
+            if (!destUrl) return; // Display all possible destinations in the body if no destination is set.
+            console.log("Redirecting to:", destUrl);
+
+            const url = atob(destUrl[1]);
             window.location.href = url;
         }
 
@@ -152,15 +157,42 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             const link = document.getElementById("manual-redirect-link");
-            if (link) {
-                link.href = atob(getDestUrl());
+            const dUrl = getDestUrl();
+            if (link && dUrl) {
+                link.href = atob(dUrl[1]);
+            }
+
+            if (!dUrl) {
+                document.getElementById("redirect-message").remove();
+
+                const contentDiv = document.getElementById("content");
+                contentDiv.style.display = "block";
+                const ul = document.getElementById("possible-destinations");
+                for (const key in destMap) {
+                    if (destMap.hasOwnProperty(key)) {
+                        const li = document.createElement("li");
+                        
+                        const displayName = atob(destMap[key][0]);
+                        const encodedUrl = atob(destMap[key][1]);
+                        const shouldDisplay = destMap[key][2];
+                        if (!shouldDisplay) continue;
+                        li.innerHTML = `<b>${displayName}:</b> <a href="${encodedUrl}">${encodedUrl}</a>`;
+                        li.style.display = "list-item";
+                    
+                        ul.appendChild(li);
+                    }
+                }
             }
         });
     </script>
 </head>
 
 <body>
-    <p>Redirecting... If you do not get redirected, please enable Javascript or <a id="manual-redirect-link" href="#">click here</a></p>
-</body>
+    <p id="redirect-message">Redirecting... If you are not redirected, please enable Javascript in your browser settings or try <a id="manual-redirect-link" href="#">clicking here</a></p>
 
+    <div id="content" style="display:none;">
+        <h1>my other links: </h1>
+        <ul id="possible-destinations"></ul>
+    </div>
+</body>
 </html>
