@@ -22,6 +22,13 @@ const badges = [
     { src: "assets/88x31/moist.gif", title: "Moist", href: "https://www.youtube.com/watch?v=8v9d1a6b2eY" },
     { src: "assets/88x31/autism.gif", title: "Autism Awareness", href: "https://www.autismspeaks.org/" },
     { src: "assets/88x31/click_here.gif", title: "Click here", href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+    { src: "assets/88x31/cookie_free.gif", title: "This site is cookie free!" },
+    { src: "assets/88x31/take_back_the_web.gif", title: "Take back the web!" },
+    { src: "assets/88x31/the_game.png", title: "You just lost the game", href: "https://en.wikipedia.org/wiki/The_Game_(mind_game)" },
+    { src: "assets/88x31/made_with_css.gif", title: "Made using CSS" },
+    { src: "assets/88x31/rave_now.gif", title: "Rave now!" },
+    { src: "assets/88x31/hl.gif", title: "Half-Life", href: "https://en.wikipedia.org/wiki/Half-Life_(video_game)" },
+    { src: "assets/88x31/source.png", title: "Made with <3 using the Source engine", href: "https://en.wikipedia.org/wiki/Source_(game_engine)" },
 ];
 
 const container = document.getElementById("badges");
