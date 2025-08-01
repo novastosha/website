@@ -133,7 +133,7 @@ def refill_music_youtube_links(filename='../music.json'):
     for song in data:
         if not song['urls']:
             song['urls'] = []
-        if not any(url['type'] == 'youtube' for url in song['urls']) or not song['urls']['youtube']:
+        if not any(url['type'] == 'youtube' for url in song['urls']):
             youtube_url = search_youtube_link(f"{song['title']} {song['artist']}", YT_DATA_API_KEY)
             if youtube_url:
                 song['urls'].append({
