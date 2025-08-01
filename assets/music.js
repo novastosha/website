@@ -49,7 +49,11 @@ async function displayMusic() {
         songDiv.appendChild(meta);
         contentDiv.appendChild(songDiv);
 
+        cover.crossOrigin = "anonymous";
+
         cover.onload = () => {
+            cover.crossOrigin = "anonymous";
+            
             const canvas = document.createElement("canvas");
             canvas.width = cover.naturalWidth;
             canvas.height = cover.naturalHeight;
