@@ -1,5 +1,20 @@
 [
     {
+        "title": "Let It Happen",
+        "artist": "Tame Impala",
+        "album": "Currents",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2X485T9Z5Ly0xyaghN73ed"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=pFptt7Cargc"
+            }
+        ]
+    },
+    {
         "title": "Apocalypse",
         "artist": "Cigarettes After Sex",
         "album": "Cigarettes After Sex",
