@@ -1,4 +1,5 @@
 assets/music/fetcher/secrets.json
 assets/music/fetcher/.cache
+assets/music/fetcher/local
 assets/music/music.json.bak
 .venv

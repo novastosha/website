@@ -14,7 +14,7 @@ if not SPOTIPY_CLIENT_ID or not SPOTIPY_CLIENT_SECRET or not YT_DATA_API_KEY:
         secrets = json.load(f)
         SPOTIPY_CLIENT_ID = secrets.get('id')
         SPOTIPY_CLIENT_SECRET = secrets.get('secret')
-        YT_DATA_API_KEY = secrets.get('yt_api_key_2')
+        YT_DATA_API_KEY = secrets.get('yt_api_key')
 
 scope='playlist-read-private user-library-read user-top-read'
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
@@ -24,20 +24,21 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope=scope
 ))
 
-def fetch_all_liked_songs():
+def fetch_all_liked_songs(limitless=True, limit=50):
     results = []
     offset = 0
-    while True:
-        items = sp.current_user_saved_tracks(limit=50, offset=offset)
+    while limitless or offset <= limit:  # Fetch up to 1000 tracks
+        items = sp.current_user_saved_tracks(limit=limit, offset=offset)
         if not items['items']:
             break
         results.extend(items['items'])
-        offset += 50
+        offset += limit
+
     return results
 
 def fetch_all_liked_songs_data():
     output = []
-    liked_songs = fetch_all_liked_songs()
+    liked_songs = fetch_all_liked_songs(limitless=False, limit=12)
 
     for item in liked_songs:
         track = item['track']
@@ -176,7 +177,7 @@ if __name__ == '__main__':
     #music_data = fetch_music_data()
     #save_music_data(music_data)
 
-    #save_music_data(fetch_all_liked_songs_data(), filename='../liked_songs.json')
+    #save_music_data(fetch_all_liked_songs_data(), filename='./local/liked_songs.json')
 
     refill_image_covers()
-    dump_last_updated()
+#    dump_last_updated()

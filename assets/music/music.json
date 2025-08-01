@@ -64,6 +64,294 @@
         "image": "https://i.scdn.co/image/ab67616d00001e028324db1ae37be249aed887e7"
     },
     {
+        "title": "0% Angel",
+        "artist": "Mr.Kitty",
+        "album": "Ephemeral",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0l2Ob0zMIQ21gJn642HyQ1"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02fbca5df3ed1da054c0391957"
+    },
+    {
+        "title": "No Angel to Me",
+        "artist": "Second Sight",
+        "album": "Teenage Bliss",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/1II4zpAjKcC6otQvLCSB80"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0242cc8c4e73fd200ef640ea1f"
+    },
+    {
+        "title": "Bonfire",
+        "artist": "Childish Gambino",
+        "album": "Camp",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0wps7rop5iHwBo0rQZ2g9A"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e026182cfe2e2a090d125c81dc0"
+    },
+    {
+        "title": "The Winner Takes It All",
+        "artist": "ABBA",
+        "album": "Super Trouper",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3oEkrIfXfSh9zGnE7eBzSV"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02f7ecaf9daf2c1d5ca89f7312"
+    },
+    {
+        "title": "Thunderstruck",
+        "artist": "AC/DC",
+        "album": "Iron Man 2",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/52UWtKlYjZO3dHoRlWuz9S"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e028399047ff71200928f5b6508"
+    },
+    {
+        "title": "Back In Black",
+        "artist": "AC/DC",
+        "album": "Back In Black",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e020b51f8d91f3a21e8426361ae"
+    },
+    {
+        "title": "Highway to Hell",
+        "artist": "AC/DC",
+        "album": "Highway to Hell",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2zYzyRzz6pRmhPzyfMEC8s"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0251c02a77d09dfcd53c8676d0"
+    },
+    {
+        "title": "Nothing Else Matters - Remastered 2021",
+        "artist": "Metallica",
+        "album": "Metallica (Remastered Deluxe Box Set)",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/6QAsrXPnMSXIbV0yEJHlEX"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02c1a13209dfe146aef3296e34"
+    },
+    {
+        "title": "Master Of Puppets",
+        "artist": "Metallica",
+        "album": "Master Of Puppets (Remastered)",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2MuWTIM3b0YEAskbeeFE1i"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02668e3aca3167e6e569a9aa20"
+    },
+    {
+        "title": "Don't Cry (Original)",
+        "artist": "Guns N' Roses",
+        "album": "Use Your Illusion I",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2N2yrmodOnVF10mKvItC9P"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0215d11ba311f61577c5e18370"
+    },
+    {
+        "title": "Welcome To The Jungle",
+        "artist": "Guns N' Roses",
+        "album": "Appetite For Destruction",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0G21yYKMZoHa30cYVi1iA8"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0221ebf49b3292c3f0f575f0f5"
+    },
+    {
+        "title": "Sweet Child O' Mine",
+        "artist": "Guns N' Roses",
+        "album": "Appetite For Destruction",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7snQQk1zcKl8gZ92AnueZW"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0221ebf49b3292c3f0f575f0f5"
+    },
+    {
+        "title": "(Ghost) Riders In the Sky",
+        "artist": "Johnny Cash",
+        "album": "The Essential Johnny Cash",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3DNXN5fPRdkYm64oCdV8L6"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0279d1be381026d9bbd0de591b"
+    },
+    {
+        "title": "Come As You Are",
+        "artist": "Nirvana",
+        "album": "Nevermind (Remastered)",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/18v5GSlymMWt3OZt0WBUlf"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02fb2d4c1ac0a601826986c785"
+    },
+    {
+        "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "artist": "ABBA",
+        "album": "Voulez-Vous",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3vkQ5DAB1qQMYO4Mr9zJN6"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=XEjLoHdbVeE"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e022459a47f9c8210c6ff2ae37e"
+    },
+    {
+        "title": "Dancing Queen",
+        "artist": "ABBA",
+        "album": "Arrival",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0GjEhVFGZW8afUYGChu3Rr"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0270f7a1b35d5165c85b95a0e0"
+    },
+    {
+        "title": "Mary On A Cross",
+        "artist": "Ghost",
+        "album": "Seven Inches Of Satanic Panic",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2HZLXBOnaSRhXStMLrq9fD"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02e9d7c42bfbd5f4197f01faf5"
+    },
+    {
+        "title": "Maria Magdalena",
+        "artist": "Sandra",
+        "album": "Methods Of Dance (Electronica & Leftfield ‘73-‘87)",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3i78L3PrYSUoz9PhNbm9wb"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=qwrrpBc7xWA"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02605bafbd3a7bf46d22bf51d9"
+    },
+    {
         "title": "Callas Went Away",
         "artist": "Enigma",
         "album": "MCMXC a.D.",
@@ -110,6 +398,54 @@
             }
         ],
         "image": "https://i.scdn.co/image/ab67616d00001e0202859310b61e59756abb90ad"
+    },
+    {
+        "title": "Say Yes To Heaven",
+        "artist": "Lana Del Rey",
+        "album": "Say Yes To Heaven",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/6GGtHZgBycCgGBUhZo81xe"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=A0TlnvbPvSc"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02aa27708d07f49c82ff0d0dae"
+    },
+    {
+        "title": "Comptine d'un autre été, l'après-midi",
+        "artist": "Yann Tiersen",
+        "album": "Le Fabuleux destin d'Amélie Poulain (Bande originale du film)",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/14rZjW3RioG7WesZhYESso"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=NvryolGa19A"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e021b7844a8c73c4d48f0bca1de"
+    },
+    {
+        "title": "Cherry",
+        "artist": "Lana Del Rey",
+        "album": "Lust For Life",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/1Ym6aMuT5bliaZMC67AmPp"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=uNuMH2i6wdI"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0295e2fd1accb339fa14878190"
     },
     {
         "title": "Genesis",
