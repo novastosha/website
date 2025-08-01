@@ -38,6 +38,8 @@ async function displayMusic() {
 
         const links = document.createElement("p");
         song.urls.forEach(url => {
+            if (!url.url) return;
+
             const link = document.createElement("a");
             link.href = url.url;
             link.textContent = `[${url.type}]`;
@@ -53,7 +55,7 @@ async function displayMusic() {
 
         cover.onload = () => {
             cover.crossOrigin = "anonymous";
-            
+
             const canvas = document.createElement("canvas");
             canvas.width = cover.naturalWidth;
             canvas.height = cover.naturalHeight;
