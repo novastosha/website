@@ -17,6 +17,7 @@ async function displayMusic() {
         songDiv.classList.add("song");
 
         const cover = document.createElement("img");
+        cover.crossOrigin = "anonymous";
         cover.src = song.image || '';
         cover.alt = `${song.title} cover`;
         songDiv.appendChild(cover);
