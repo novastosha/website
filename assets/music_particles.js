@@ -25,12 +25,18 @@ window.addEventListener('click', (e) => {
     spawnNoteParticle(e.clientX, e.clientY - 16);
 });
 
+let noteIntensity = 4;
+
+document.getElementById('note-intensity').addEventListener('input', (e) => {
+    noteIntensity = parseInt(e.target.value, 10);
+});
+
 setInterval(() => {
     if (!document.hasFocus()) return;
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < noteIntensity; i++) {
         const x = Math.random() * window.innerWidth;
         const y = Math.random() * window.innerHeight;
         spawnNoteParticle(x, y);
     }
-}, 400);
+}, 500);

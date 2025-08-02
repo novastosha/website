@@ -28,6 +28,18 @@
             padding: 1em;
         }
 
+        #note-intensity {
+            width: 200px;
+            margin-left: 1rem;
+            accent-color: var(--accent-color);
+        }
+
+        label[for="note-intensity"] {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            margin-right: 0.5rem;
+        }
+
         #navbar {
             display: flex;
             justify-content: space-between;
@@ -163,6 +175,9 @@
     </div>
 
     <div id="content">
+        <label for="note-intensity">fun-o-meter: </label>
+        <input type="range" id="note-intensity" min="0" max="50" value="4" />
+
         <h2>my top songs I listen to recently</h2>
         <p>Last updated: <span id="last-updated"></span></p>
         <div id="music-list"></div>
