@@ -4,10 +4,5 @@
         "type": "directory",
         "path": "bios"
     },
-    "joesph.png",
-    {
-        "name": "logs",
-        "type": "directory",
-        "path": "logs"
-    }
+    "joesph.png"
 ]

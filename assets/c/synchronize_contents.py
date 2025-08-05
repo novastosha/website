@@ -22,7 +22,7 @@ def generate_directory_contents(directory, generate_index_html=False):
     if generate_index_html:
         index_html_path = directory / 'index.html'
         if not index_html_path.exists():
-            with open("./assets/c/directory_template.html", 'r') as template_file:
+            with open("../assets/c/directory_template.html", 'r') as template_file:
                 template_content = template_file.read()
             with open(index_html_path, 'w') as index_file:
                 index_file.write(template_content)
@@ -34,7 +34,7 @@ def generate_directory_contents(directory, generate_index_html=False):
         json.dump(contents, f, indent=4)
 
 def main():
-    root = pathlib.Path("./c/")
+    root = pathlib.Path(".")
     generate_directory_contents(root)
 if __name__ == "__main__":
     main()
