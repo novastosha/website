@@ -1,0 +1,40 @@
+[2025-08-05 20:38:59] Service started.
+[2025-08-05 20:40:39] Service started.
+[2025-08-05 20:40:52] Change: ["H:\\sajed.dev\\c\\oneko.gif"]
+[2025-08-05 20:40:52] Change: ["H:\\sajed.dev\\c\\oneko.gif"]
+[2025-08-05 20:40:52] Change: ["H:\\sajed.dev\\c\\oneko.gif"]
+[2025-08-05 20:40:52] Change: ["H:\\sajed.dev\\c\\oneko.gif"]
+[2025-08-05 20:40:52] Change: ["H:\\sajed.dev\\c\\oneko.gif"]
+[2025-08-05 20:41:02] Python script failed with status: exit code: 2
+[2025-08-05 20:42:17] Service started.
+[2025-08-05 20:42:28] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:42:28] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:42:28] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:42:38] Python script failed with status: exit code: 2
+[2025-08-05 20:42:38] Python script output: 
+[2025-08-05 20:43:13] Service started.
+[2025-08-05 20:43:25] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:43:35] Python script failed with status: exit code: 2
+[2025-08-05 20:43:35] Python script output: 
+[2025-08-05 20:43:35] Python script error output: C:\Users\novas\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'H:\\sajed.dev\\assets\\c\\synchronize_contents.py': [Errno 2] No such file or directory
+
+[2025-08-05 20:44:50] Service started.
+[2025-08-05 20:45:22] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:45:22] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:45:22] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:46:25] Service started.
+[2025-08-05 20:46:29] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:46:39] Python script failed with status: exit code: 2
+[2025-08-05 20:46:39] Python script output: 
+[2025-08-05 20:46:39] Python script error output: C:\Users\novas\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'H:\\sajed.dev\\assets\\c\\synchronize_contents.py': [Errno 2] No such file or directory
+
+[2025-08-05 20:47:23] Service started.
+[2025-08-05 20:47:35] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:47:35] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:47:35] Change: ["H:\\sajed.dev\\c\\notes.png"]
+[2025-08-05 20:47:45] Python script failed with status: exit code: 2
+[2025-08-05 20:47:45] Python script output: 
+[2025-08-05 20:47:45] Python script error output: C:\Users\novas\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'H:\\sajed.dev\\assets\\c\\synchronize_contents.py': [Errno 2] No such file or directory
+
+[2025-08-05 20:50:07] Service started.
+[2025-08-05 20:50:28] Change: ["H:\\sajed.dev\\c\\notes.png"]
