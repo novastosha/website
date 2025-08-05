@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const customContent = knownCustomContent[content];
         if (customContent) {
+            document.getElementById('header').textContent = "Redirecting...";
+
             const contentType = customContent.type;
             switch (contentType) {
                 case 'href':
