@@ -1,0 +1,8 @@
+[
+    {
+        "name": "empty",
+        "type": "directory",
+        "path": "empty"
+    },
+    "test.bin"
+]
