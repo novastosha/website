@@ -7,7 +7,7 @@ function getUrlContent() {
 document.addEventListener('DOMContentLoaded', async () => {
     const content = getUrlContent();
     if (content) {
-        const knownCustomContent = await fetch('/assets/c/custom_content.json')
+        const knownCustomContent = await fetch('../assets/c/custom_content.json')
             .then(response => response.json())
             .catch(() => ({}));
 
