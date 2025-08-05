@@ -1,11 +1,10 @@
 [
-    ".gitignore",
-    "batman.jpg",
     {
         "name": "bios",
         "type": "directory",
         "path": "bios"
     },
+    "brucewayne.jpg",
     "joesph.png",
     {
         "name": "logs",
