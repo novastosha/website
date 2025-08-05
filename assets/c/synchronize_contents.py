@@ -6,11 +6,11 @@ def generate_directory_contents(directory, generate_index_html=False):
     contents = []
     for item in directory.iterdir():
         if item.is_file():
-            if item.name in  ['contents.json', 'index.html', '.gitignore', 'logs']:
+            if item.name in  ['contents.json', 'index.html', '.gitignore']:
                 continue
 
             contents.append(item.name)
-        elif item.is_dir():
+        elif item.is_dir() and item.name not in ['.git', 'logs']:
             contents.append({
                 'name': item.name,
                 'type': 'directory',
