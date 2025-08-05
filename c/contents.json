@@ -6,9 +6,5 @@
     },
     "brucewayne.jpg",
     "joesph.png",
-    {
-        "name": "logs",
-        "type": "directory",
-        "path": "logs"
-    }
+    "notes.png"
 ]
