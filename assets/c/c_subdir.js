@@ -10,13 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentDirectory.textContent = "This directory is empty.";
         return;
     }
-
-    const contentList = document.getElementById('content-list')
+    const contentList = document.getElementById('content-list');
     contents.forEach(item => {
         if (item['type'] === 'directory') {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
-
             link.href = `${window.location.pathname}/${item.name}`;
             link.textContent = item.name;
             listItem.appendChild(link);
@@ -25,9 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const listItem = document.createElement('li');
+        const link = document.createElement('a');
         link.href = `${window.location.pathname}/${item}`;
-        listItem.textContent = item;
+        link.textContent = item;
+        listItem.appendChild(link);
         contentList.appendChild(listItem);
     });
-
 });
