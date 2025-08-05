@@ -6,7 +6,7 @@ def generate_directory_contents(directory, generate_index_html=False):
     contents = []
     for item in directory.iterdir():
         if item.is_file():
-            if item.name == "index.html" or item.name == "contents.json":
+            if item.name in  ['contents.json', 'index.html', '.gitignore', 'logs']:
                 continue
 
             contents.append(item.name)
