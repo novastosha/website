@@ -1,5 +1,68 @@
 [
     {
+        "title": "i was all over her",
+        "artist": "salvia palth",
+        "album": "melanchole",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7svpAkwc6xaSxlbZ7V7JiS"
+            },
+            {
+                "type": "youtube",
+                "url": null
+            }
+        ]
+    },
+    {
+        "title": "Renegade",
+        "artist": "Aaryan Shah",
+        "album": "Renegade",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3yWF3DqFBNLvf7s4C7mKUm"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=vD1bPSjFAQM"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0264f702800c49b5979852afda"
+    },
+    {
+        "title": "X's",
+        "artist": "Cigarettes After Sex",
+        "album": "X's",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7nHXJNSBnkHFjddclFrXiI"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=oXcX94gLTfo"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02967004d2f641e38309a0b547"
+    },
+    {
+        "title": "Poison Tree",
+        "artist": "Grouper",
+        "album": "Poison Tree",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/60mDV7sxCXbclEN2wSeI54"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=6gnKBDlJutA"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02227c452ff148084335b3fc59"
+    },
+    {
         "title": "Let It Happen",
         "artist": "Tame Impala",
         "album": "Currents",

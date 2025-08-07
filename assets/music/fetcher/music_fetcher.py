@@ -38,7 +38,7 @@ def fetch_all_liked_songs(limitless=True, limit=50):
 
 def fetch_all_liked_songs_data():
     output = []
-    liked_songs = fetch_all_liked_songs(limitless=False, limit=12)
+    liked_songs = fetch_all_liked_songs(limitless=False, limit=7)
 
     for item in liked_songs:
         track = item['track']
@@ -63,8 +63,13 @@ def fetch_all_liked_songs_data():
                     'type': 'youtube',
                     'url': search_youtube_link(f"{title} {artist}", YT_DATA_API_KEY)
                 }
-            ]
+            ],
+            'image': None
         }
+
+        images = track['album']['images']
+        cover_url = images[1]['url'] if len(images) > 1 else images[0]['url']
+        song['image'] = cover_url
 
         output.append(song)
 
@@ -97,8 +102,14 @@ def fetch_music_data():
                     'type': 'youtube',
                     'url': search_youtube_link(f"{title} {artist}", YT_DATA_API_KEY)
                 }
-            ]
+            ],
+            'image': None
         }
+
+        
+        images = track['tracks']['items'][0]['album']['images']
+        cover_url = images[1]['url'] if len(images) > 1 else images[0]['url']
+        song['image'] = cover_url
 
         output.append(song)
 
@@ -177,7 +188,5 @@ if __name__ == '__main__':
     #music_data = fetch_music_data()
     #save_music_data(music_data)
 
-    #save_music_data(fetch_all_liked_songs_data(), filename='./local/liked_songs.json')
-
-    refill_image_covers()
-#    dump_last_updated()
+    save_music_data(fetch_all_liked_songs_data(), filename='./music.json.bak')
+    dump_last_updated()
