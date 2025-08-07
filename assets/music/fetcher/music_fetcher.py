@@ -188,5 +188,7 @@ if __name__ == '__main__':
     #music_data = fetch_music_data()
     #save_music_data(music_data)
 
-    save_music_data(fetch_all_liked_songs_data(), filename='./music.json.bak')
-    dump_last_updated()
+    refill_image_covers()
+
+    #save_music_data(fetch_all_liked_songs_data(), filename='./music.json.bak')
+    #dump_last_updated()
