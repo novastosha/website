@@ -38,7 +38,7 @@
             <textarea id="message" name="message" required></textarea>
         </div>
 
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAABtEXsxg_C-SeY32" data-theme="dark"></div>
+        <div id="cf-turnstile" class="cf-turnstile" data-sitekey="0x4AAAAAABtEXsxg_C-SeY32" data-theme="dark"></div>
         <div>
             <a href="#" id="submit-link">[ Submit ]</a>
         </div>
@@ -81,6 +81,11 @@
             margin-top: 0.5rem;
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        .cf-turnstile {
+            display: block;
+            margin: 0.6rem auto;
         }
 
         #form-response {
