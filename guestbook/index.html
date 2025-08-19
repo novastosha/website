@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sajed's homepage</title>
+    <meta name="author" content="S. S.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Leave me a message!">
+
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/input-compatible-styles.css">
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+
+<body>
+    <div id="navbar">
+        <div>
+            <h1>Leave me a message!</h1>
+        </div>
+        <div id="navbar-links">
+            <b><a href="/">home</a></b>
+        </div>
+    </div>
+
+    <form id="message-form" method="POST" action="https://api.sajed.dev/quotes">
+        <div class="form-line">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-line">
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website">
+            <label>(optional)</label>
+        </div>
+        <div class="form-line">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAABtEXsxg_C-SeY32" data-theme="dark"></div>
+        <div>
+            <a href="#" id="submit-link">[ Submit ]</a>
+        </div>
+
+        <div id="form-response"></div>
+    </form>
+
+    <style>
+        form {
+            font-family: monospace;
+            margin-top: 1rem;
+        }
+
+        .form-line {
+            margin-bottom: 0.5rem;
+        }
+
+        label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        input,
+        textarea {
+            background: black;
+            color: white;
+            border: 1px solid #888;
+            font-family: monospace;
+            padding: 2px 4px;
+            width: 300px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        #submit-link {
+            display: block;
+            text-align: center;
+            margin-top: 0.5rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #form-response {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        #form-response.success {
+            color: lime;
+        }
+
+        #form-response.error {
+            color: red;
+        }
+    </style>
+
+    <script src="https://sajed.dev/assets/quotes.js"></script>
+
+</body>
+
+</html>
