@@ -39,8 +39,10 @@
         const parts = entries.map(e => {
             const name = escapeHtml(e.name || 'Anonymous');
             let website = (e.website && String(e.website).trim()) ? escapeHtml(e.website.trim()) : null;
-            if (!(website.startsWith("https://") || website.startsWith("http://"))) {
-                website = "https://"+website
+            if (website) {
+                if (!(website.startsWith("https://") || website.startsWith("http://"))) {
+                    website = "https://" + website
+                }
             }
 
             const date = prettyDate(e.date || e.created_at || e.time || '');
