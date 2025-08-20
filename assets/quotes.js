@@ -13,9 +13,6 @@ document.getElementById("submit-link").addEventListener("click", async function 
         return;
     }
 
-    // Append the token into the form data
-    formData.append("cf-turnstile-response", tokenInput.value);
-
     try {
         const res = await fetch(form.action, {
             method: "POST",

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>sajed's manage wall</title>
+  <meta name="author" content="S. S.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manage wall messages (approve/delete)">
+
+  <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/input-compatible-styles.css">
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#0f0f0f;
+      --border:#2b2b2b;
+      --muted:#888;
+      --accent:#7cc;
+      --success:#7c7;
+      --danger:#f55;
+      font-family: monospace;
+    }
+
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: #ddd;
+      margin: 0;
+      padding: 1rem;
+      /* removed vertical centering — content flows top to bottom */
+    }
+
+    /* Horizontal center only: container with auto horizontal margins */
+    .container {
+      width: 100%;
+      max-width: 980px;
+      margin: 2rem auto; /* centers horizontally and keeps top spacing */
+    }
+
+    #navbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0.5rem 1rem;
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius: 6px 6px 0 0;
+    }
+    h1{ margin:0; font-size:1.1rem; }
+    #navbar-links a{ color:#ddd; text-decoration:none; margin-left:0.75rem; }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+
+    .panel, #navbar { width: 100%; box-sizing: border-box; }
+
+    label { display:inline-block; width:60px; }
+    input[type="text"], input[type="url"], textarea, select {
+      background: black;
+      color: white;
+      border: 1px solid #444;
+      padding: 4px 6px;
+      font-family: monospace;
+      width: 320px;
+    }
+    textarea { height: 4.5rem; width: 100%; max-width: 640px; }
+
+    .controls {
+      display:flex;
+      gap: 0.5rem;
+      align-items:center;
+      margin-top: 0.5rem;
+      flex-wrap:wrap;
+    }
+
+    button, .link-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: #ddd;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    button.primary { border-color: var(--accent); }
+    button.danger { border-color: var(--danger); color: var(--danger); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #list { margin-top: 1rem; border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+
+    table#list th, table#list td {
+      padding: 8px;
+      border-bottom: 1px solid #1b1b1b;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    table#list th { color: var(--muted); font-weight: normal; font-size: 0.85rem; }
+    .entry-message { white-space: pre-wrap; max-width: 60ch; color: #ddd; }
+
+    .checkbox {
+      width:18px;
+      height:18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .meta { color: var(--muted); font-size: 0.85rem; }
+
+    #feedback { margin-top: 0.75rem; font-weight: bold; }
+    #feedback.success { color: var(--success); }
+    #feedback.error { color: var(--danger); }
+
+    .small { font-size:0.85rem; color:var(--muted); }
+
+    @media (max-width:720px) {
+      body { padding: 0.5rem; }
+      .container { max-width: 100%; margin: 1rem auto; }
+      label { display:block; width:100%; margin-bottom:0.25rem; }
+      input[type="text"], select { width: 100%; }
+      textarea { width: 100%; }
+      .panel { padding: 0.75rem; }
+      #navbar { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="navbar">
+      <div><h1>Manage wall</h1></div>
+      <div id="navbar-links"><b><a href="/">home</a></b></div>
+    </div>
+
+    <div class="panel" id="manager-panel">
+      <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <label for="token">Token:</label>
+        <input id="token" type="text" placeholder="manager token" autocomplete="off" required>
+        <div class="controls" style="margin-left:auto;">
+          <button id="load" class="primary">Load Messages</button>
+          <button id="refresh" title="Reload messages" class="small">Refresh</button>
+        </div>
+      </div>
+
+      <div class="small" style="margin-top:0.6rem;">
+        You must type the token manually each time. It is never stored.
+      </div>
+
+      <div id="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="panel" id="list-panel" style="display:none;">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+        <div><label><input id="select-all" type="checkbox" class="checkbox"> Select all</label></div>
+
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <label for="action-select" class="small">Action:</label>
+          <select id="action-select" aria-label="Choose action">
+            <option value="APPROVE">Approve</option>
+            <option value="DELETE">Delete</option>
+          </select>
+
+          <button id="submit-action" class="primary">Submit selected</button>
+        </div>
+      </div>
+
+      <table id="list" aria-live="polite">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Message</th>
+            <th>Author / Website</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="list-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const endpoint = '/quotes/manage';
+      const tokenInput = document.getElementById('token');
+      const loadBtn = document.getElementById('load');
+      const refreshBtn = document.getElementById('refresh');
+      const feedback = document.getElementById('feedback');
+      const listPanel = document.getElementById('list-panel');
+      const listBody = document.getElementById('list-body');
+      const selectAll = document.getElementById('select-all');
+      const actionSelect = document.getElementById('action-select');
+      const submitActionBtn = document.getElementById('submit-action');
+
+      let entriesByUuid = {};
+
+      function setFeedback(message, type=''){
+        feedback.textContent = message;
+        feedback.className = type ? type : '';
+      }
+
+      function clearList(){
+        entriesByUuid = {};
+        listBody.innerHTML = '';
+        listPanel.style.display = 'none';
+        selectAll.checked = false;
+      }
+
+      async function postForm(formData){
+        const res = await fetch(endpoint, { method: 'POST', body: formData });
+        let json;
+        try { json = await res.json(); } catch (e) { throw new Error('Invalid JSON response'); }
+        return json;
+      }
+
+      async function fetchList(){
+        setFeedback('Loading messages...', '');
+        clearList();
+
+        const token = tokenInput.value.trim();
+        if (!token) { setFeedback('Enter token first.', 'error'); return; }
+
+        const fd = new FormData();
+        fd.append('action','GET');
+        fd.append('token', token);
+
+        try {
+          const result = await postForm(fd);
+          if (!result || !result.success) { setFeedback(result?.error || 'Failed to load messages','error'); return; }
+          const arr = result.result || [];
+          if (!Array.isArray(arr) || arr.length === 0) { setFeedback('No messages found.','success'); return; }
+          arr.forEach(e => entriesByUuid[e.uuid] = e);
+          renderList(arr);
+          setFeedback(`Loaded ${arr.length} message${arr.length !== 1 ? 's' : ''}.`,'success');
+          listPanel.style.display = '';
+        } catch (err) {
+          console.error(err);
+          setFeedback('Network or server error while loading.','error');
+        }
+      }
+
+      function renderList(arr){
+        listBody.innerHTML = '';
+        arr.slice().reverse().forEach(entry => {
+          const tr = document.createElement('tr');
+
+          const chkTd = document.createElement('td');
+          const chk = document.createElement('input');
+          chk.type = 'checkbox';
+          chk.className = 'checkbox';
+          chk.dataset.uuid = entry.uuid;
+          chk.addEventListener('change', onSelectionChange);
+          chkTd.appendChild(chk);
+          tr.appendChild(chkTd);
+
+          const msgTd = document.createElement('td');
+          msgTd.className = 'entry-message';
+          msgTd.textContent = entry.message || '(no message)';
+          tr.appendChild(msgTd);
+
+          const authorTd = document.createElement('td');
+          authorTd.innerHTML = `<div><strong>${escapeHtml(entry.name || 'anonymous')}</strong></div>` +
+                               `<div class="meta">${escapeHtml(entry.website || '')}</div>`;
+          tr.appendChild(authorTd);
+
+          const dateTd = document.createElement('td');
+          dateTd.textContent = entry.date || '';
+          tr.appendChild(dateTd);
+
+          listBody.appendChild(tr);
+        });
+      }
+
+      function onSelectionChange(){
+        const total = document.querySelectorAll('#list-body input[type="checkbox"]').length;
+        const checked = document.querySelectorAll('#list-body input[type="checkbox"]:checked').length;
+        selectAll.checked = (total > 0 && checked === total);
+      }
+
+      selectAll.addEventListener('change', () => {
+        const all = document.querySelectorAll('#list-body input[type="checkbox"]');
+        all.forEach(cb => cb.checked = selectAll.checked);
+      });
+
+      async function submitAction(){
+        const token = tokenInput.value.trim();
+        if (!token) { setFeedback('Enter token first.','error'); return; }
+
+        const selectedUuids = Array.from(document.querySelectorAll('#list-body input[type="checkbox"]:checked'))
+          .map(cb => cb.dataset.uuid);
+
+        if (selectedUuids.length === 0) { setFeedback('No items selected.','error'); return; }
+
+        const action = actionSelect.value;
+        if (action === 'DELETE') {
+          if (!confirm(`Delete ${selectedUuids.length} selected message${selectedUuids.length !== 1 ? 's' : ''}? This cannot be undone.`)) return;
+          const fd = new FormData();
+          fd.append('action','DELETE');
+          fd.append('token', token);
+          fd.append('uuids', JSON.stringify(selectedUuids));
+          try {
+            setFeedback('Deleting...','');
+            const resp = await postForm(fd);
+            if (resp?.success) { setFeedback('Deleted successfully.','success'); await fetchList(); }
+            else { setFeedback(resp?.error || 'Delete failed','error'); }
+          } catch (err) { console.error(err); setFeedback('Network error during delete.','error'); }
+        } else if (action === 'APPROVE') {
+          const payload = selectedUuids.map(uuid => {
+            const e = entriesByUuid[uuid] || {};
+            return { uuid, name: e.name || '', website: e.website || '', message: e.message || '', date: e.date || '' };
+          });
+          const fd = new FormData();
+          fd.append('action','APPROVE');
+          fd.append('token', token);
+          fd.append('uuids', JSON.stringify(payload));
+          try {
+            setFeedback('Approving...','');
+            const resp = await postForm(fd);
+            if (resp?.success) { setFeedback('Approved successfully.','success'); await fetchList(); }
+            else { setFeedback(resp?.error || 'Approve failed','error'); }
+          } catch (err) { console.error(err); setFeedback('Network error during approve.','error'); }
+        } else {
+          setFeedback('Unknown action','error');
+        }
+      }
+
+      function escapeHtml(s){ if (!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+
+      loadBtn.addEventListener('click', async (e) => { e.preventDefault(); await fetchList(); });
+      refreshBtn.addEventListener('click', async (e) => { e.preventDefault(); await fetchList(); });
+      submitActionBtn.addEventListener('click', async (e) => { e.preventDefault(); submitActionBtn.disabled = true; try{ await submitAction(); } finally { submitActionBtn.disabled = false; } });
+
+      tokenInput.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); loadBtn.click(); } });
+
+    })();
+  </script>
+</body>
+</html>
