@@ -29,32 +29,52 @@
         }
     }
 
-    // Render entries into marquee content
+    function makeCards(entries) {
+        const cards = [];
+        for (let i = 0; i < entries.length; i += 2) {
+            const first = entries[i];
+            const second = (i + 1) < entries.length ? entries[i + 1] : null;
+            cards.push([first, second]);
+        }
+        return cards;
+    }
+
+    // Render cards into marquee content
     function render(entries) {
         if (!Array.isArray(entries) || entries.length === 0) {
-            marquee.innerHTML = '<span class="guestbook-entry">No guestbook messages yet.</span>';
+            marquee.innerHTML = '<span class="guestbook-card"><div class="guestbook-item">No guestbook messages yet.</div></span>';
             return;
         }
 
-        const parts = entries.map(e => {
-            const name = escapeHtml(e.name || 'Anonymous');
-            let website = (e.website && String(e.website).trim()) ? escapeHtml(e.website.trim()) : null;
-            if (website) {
-                if (!(website.startsWith("https://") || website.startsWith("http://"))) {
-                    website = "https://" + website
+        const cards = makeCards(entries);
+
+        const parts = cards.map(pair => {
+            const first = pair[0];
+            const second = pair[1];
+
+            function itemHtml(e) {
+                if (!e) return '';
+                const name = escapeHtml(e.name || 'anonymous');
+                let website = (e.website && String(e.website).trim()) ? escapeHtml(e.website.trim()) : null;
+                if (website) {
+                    if (!(website.startsWith("https://") || website.startsWith("http://"))) {
+                        website = "https://" + website
+                    }
                 }
+                const date = prettyDate(e.date || e.created_at || e.time || '');
+                const message = escapeHtml(e.message || '(no message)');
+
+                const websiteHtml = website ? ` <a href="${website}" target="_blank" rel="noreferrer">${website}</a>` : '';
+                const dateHtml = `<span class="guestbook-date">${date}</span>`;
+
+                return `<div class="guestbook-item"><div class="meta"><strong>${name}</strong>${websiteHtml}${dateHtml}</div><div class="guestbook-message">${message}</div></div>`;
             }
 
-            const date = prettyDate(e.date || e.created_at || e.time || '');
-            const message = escapeHtml(e.message || '(no message)');
-
-            const nameHtml = `<strong>${name}</strong>`;
-            const websiteHtml = website ? ` <a href="${website}" target="_blank" rel="noreferrer">${website}</a>` : '';
-            const dateHtml = `<span class="guestbook-date">${date}</span>`;
-
-            return `<span class="guestbook-entry">${nameHtml}${websiteHtml}${dateHtml}<div class="guestbook-message">${message}</div></span>`;
+            // build a single card with two stacked items
+            return `<span class="guestbook-card">${itemHtml(first)}${itemHtml(second)}</span>`;
         });
 
+        // Join cards with a small separator
         marquee.innerHTML = parts.join('<span class="guestbook-sep"></span>');
     }
 
@@ -66,9 +86,7 @@
             if (!res.ok) throw new Error('network');
             const data = await res.json();
 
-            // common shapes:
-            // 1) an array: [ { name, website, message, date }, ... ]
-            // 2) { result: [...] } or { data: [...] }
+
             let arr = [];
             if (Array.isArray(data)) arr = data;
             else if (Array.isArray(data.result)) arr = data.result;
@@ -81,15 +99,26 @@
                 }
             }
 
+            // sanitize and render
             render(arr);
-            return arr; // return for the refresher's promise-handling
+            return arr;
         } catch (err) {
             console.warn('guestbook load failed', err);
-            marquee.innerHTML = '<span class="guestbook-entry">Could not load guestbook messages.</span>';
+            marquee.innerHTML = '<span class="guestbook-card"><div class="guestbook-item">Could not load guestbook messages.</div></span>';
             throw err;
         }
     }
 
+    /**
+     * createAutoRefresher(refreshFn, intervalMs = 60000)
+     * - refreshFn: function to call when refreshing (may return a Promise)
+     * - intervalMs: milliseconds between refresh attempts
+     *
+     * Behavior:
+     *  - After intervalMs elapses, if document has focus & is visible -> refresh immediately.
+     *  - Otherwise wait until focus/visibility then refresh once and reset timer.
+     *  - Supports async refreshFn (won't start next interval until promise resolves/rejects).
+     */
     function createAutoRefresher(refreshFn, intervalMs = 60_000) {
         let timerId = null;
         let pending = false;
@@ -110,11 +139,13 @@
         }
 
         function onTimeout() {
+            // interval elapsed
             if (document.hasFocus() && document.visibilityState === 'visible') {
                 doRefresh();
                 return;
             }
 
+            // wait for focus/visibility
             pending = true;
 
             focusListener = () => {
@@ -184,12 +215,9 @@
         };
     }
 
-    // initial load, then start the refresher
-    // call loadMessages immediately to populate the marquee on page open
-    loadMessages().catch(() => {/* ignore initial load errors (render shows message) */ });
-
-    const refresher = createAutoRefresher(loadMessages, 60_000);
+    loadMessages().catch(() => { /* ignore initial load errors (render shows message) */ });
+    const refresher = createAutoRefresher(loadMessages, 180_000);
     refresher.start();
 
-
+    window._guestbook = { loadMessages, refresher };
 })();
