@@ -1,3 +1,4 @@
+import argparse
 import json
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -24,7 +25,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope=scope
 ))
 
-def fetch_all_liked_songs(limitless=True, limit=50):
+def fetch_all_liked_songs(limit=50, limitless=True):
     results = []
     offset = 0
     while limitless or offset <= limit:  # Fetch up to 1000 tracks
@@ -36,9 +37,9 @@ def fetch_all_liked_songs(limitless=True, limit=50):
 
     return results
 
-def fetch_all_liked_songs_data():
+def fetch_all_liked_songs_data(limit=50, limitless=True):
     output = []
-    liked_songs = fetch_all_liked_songs(limitless=False, limit=7)
+    liked_songs = fetch_all_liked_songs(limitless=limitless, limit=limit)
 
     for item in liked_songs:
         track = item['track']
@@ -75,10 +76,10 @@ def fetch_all_liked_songs_data():
 
     return output
 
-def fetch_music_data():
+def fetch_music_data(limit=50, _unused_param=None):
     output = []
 
-    top_tracks = sp.current_user_top_tracks(time_range='long_term', limit=50)
+    top_tracks = sp.current_user_top_tracks(time_range='long_term', limit=limit)
 
     for track in top_tracks['items']:
         if not track:
@@ -185,10 +186,20 @@ def dump_last_updated(filename='../last_updated.json'):
     return last_updated
 
 if __name__ == '__main__':
-    #music_data = fetch_music_data()
-    #save_music_data(music_data)
+    parser = argparse.ArgumentParser(description='Music Fetcher script')
+    parser.add_argument('--refill-youtube', action='store_true', help='Refill YouTube links')
+    parser.add_argument('--refill-covers', action='store_true', help='Refill image covers')
+    parser.add_argument('--fetch-music', default=10, help='Fetch new music data')
+    parser.add_argument('--io', default='../music.json', help='Input/Output JSON file')
 
-    refill_image_covers()
+    args = parser.parse_args()
 
-    #save_music_data(fetch_all_liked_songs_data(), filename='./music.json.bak')
-    #dump_last_updated()
+    if args.refill_youtube:
+        refill_music_youtube_links(args.io)
+    if args.refill_covers:
+        refill_image_covers(args.io)
+
+
+
+    save_music_data(fetch_all_liked_songs_data(int(args.fetch_music), False), args.io)
+    dump_last_updated()
