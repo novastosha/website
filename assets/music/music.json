@@ -1,5 +1,101 @@
 [
     {
+        "title": "Sienna",
+        "artist": "The Marías",
+        "album": "Submarine",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0InIeZW4P6VO7dUGRM4AKH"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=EiS7cKfuf6w"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e024d070fdf58fad8c54c5beb85"
+    },
+    {
+        "title": "No One Noticed",
+        "artist": "The Marías",
+        "album": "Submarine",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3siwsiaEoU4Kuuc9WKMUy5"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=Qn8F_u0vBNI"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e024d070fdf58fad8c54c5beb85"
+    },
+    {
+        "title": "What Would I Do?",
+        "artist": "Strawberry Guy",
+        "album": "What Would I Do?",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/5EJA7Rwkeuvm98CZg0XXNO"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=MelI_w9IppU"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02ba5c5d0971159a6e3299d78b"
+    },
+    {
+        "title": "haunt me (x 3)",
+        "artist": "Teen Suicide",
+        "album": "dc snuff film / waste yrself",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/1QUMpZT7HG6sO3RiBu1LAJ"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=4yHuDKlcn-k"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02a2f3a921f6366e9cce688815"
+    },
+    {
+        "title": "no, the moon",
+        "artist": "Teen Suicide",
+        "album": "i will be my own hell because there is a devil inside my body",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/5ZGzNhBC1sEtYtQ1b6Cy53"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=_MVMLLjDmuU"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e025f93544db29c78dbfabb862d"
+    },
+    {
+        "title": "Ojos Tristes (with The Marías)",
+        "artist": "Selena Gomez",
+        "album": "I Said I Love You First",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/1DFmBjoeQN9DpOVTEewyx0"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=Ch6xdV_ZjdU"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e025c99217c0a33291dcd4e0242"
+    },
+    {
         "title": "i was all over her",
         "artist": "salvia palth",
         "album": "melanchole",
