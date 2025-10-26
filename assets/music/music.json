@@ -1,5 +1,357 @@
 [
     {
+        "title": "poison tree",
+        "artist": "liza v posteli",
+        "album": "poison tree",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/4P5rdP9aUZUsGDz4nvPjcd"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=BrO5eHbvy68"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0241675d82f968d12c3aef1b8a"
+    },
+    {
+        "title": "Mystery of Love",
+        "artist": "Sufjan Stevens",
+        "album": "Mystery of Love",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/5GbVzc6Ex5LYlLJqzRQhuy"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=4WTt69YO2VI"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e023fc1588803d1887f11d660cc"
+    },
+    {
+        "title": "Call Me",
+        "artist": "TheExorcist",
+        "album": "Call Me",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/41gfvTOXSkQp7NeA2D2N6t"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=BU2eYAO31Cc"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e026f85bb1bddbccdd1de88b2cf"
+    },
+    {
+        "title": "fika",
+        "artist": "nyctophilia",
+        "album": "fika",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7fiaW56axfs9xVhNcGPzkz"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=fpoYxrln8J0"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e026e3fdb89b05e436cd70c1dbf"
+    },
+    {
+        "title": "WILDFLOWER",
+        "artist": "Billie Eilish",
+        "album": "HIT ME HARD AND SOFT",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3QaPy1KgI7nu9FJEQUgn6h"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=l08Zw-RY__Q"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0271d62ea7ea8a5be92d3c1f62"
+    },
+    {
+        "title": "Last Christmas",
+        "artist": "Wham!",
+        "album": "LAST CHRISTMAS",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2FRnf9qhLbvw8fu4IBXx78"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=E8gmARGvPlI"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02f2d2adaa21ad616df6241e7d"
+    },
+    {
+        "title": "The Cut That Always Bleeds",
+        "artist": "Conan Gray",
+        "album": "Kid Krow",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7wTqEW5nrMhvyEhEyTnOMd"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=OuTLKgPyaF0"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0288e3cda6d29b2552d4d6bc43"
+    },
+    {
+        "title": "Girl, so confusing featuring lorde",
+        "artist": "Charli xcx",
+        "album": "brb having a bratty halloween party",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/01zAXGfG0DDzqXsfm5imvA"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=0q3K6FPzY18"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e028307cbbeb2209c74d9725b67"
+    },
+    {
+        "title": "The Night We Met",
+        "artist": "Lord Huron",
+        "album": "Strange Trails",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/3hRV0jL3vUpRrcy398teAU"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=KtlgYxa6BMU"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0217875a0610c23d8946454583"
+    },
+    {
+        "title": "would've been you",
+        "artist": "sombr",
+        "album": "would've been you",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2U7svZUGvR4tfKdyxv9mXu"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=06NbjB0q46w"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02f8d014e705472544d67edcbb"
+    },
+    {
+        "title": "(dream)",
+        "artist": "salvia palth",
+        "album": "melanchole",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/17YNmMy03QLPirmBzWxFa6"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=P7GUkYg1BAo"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e024a82bda3507d50ac3e039bb0"
+    },
+    {
+        "title": "Young & Dumb",
+        "artist": "Cigarettes After Sex",
+        "album": "Cigarettes After Sex",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/514vvD0m17sJuYzoOqcE2Q"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=VlBIeZi3Ko4"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0212b69bf576f5e80291f75161"
+    },
+    {
+        "title": "You're All I Want",
+        "artist": "Cigarettes After Sex",
+        "album": "You're All I Want",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2cTvZSCqzjkTMkIypLxUFH"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=BZ6D9SEvBHs"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02963454e08e5e9def7e8cd204"
+    },
+    {
+        "title": "Crush",
+        "artist": "Cigarettes After Sex",
+        "album": "Crush",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0sz1wmBpB9gKh9zFV9YMFe"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=p7lHdbL--Ls"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0264f71083789a20353e05b1eb"
+    },
+    {
+        "title": "The Subway",
+        "artist": "Chappell Roan",
+        "album": "The Subway",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2SsY5k7UWFqgye3PUMG3Oq"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=Qam5A9lG-wc"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e020b96f8824100aab118792442"
+    },
+    {
+        "title": "Astronomy",
+        "artist": "Conan Gray",
+        "album": "Superache",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/2JN3ugW1cEahbYw0I5mw5U"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=B-W6JrZGLdE"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e0260a89b781c62ffe2136e4396"
+    },
+    {
+        "title": "back to friends",
+        "artist": "sombr",
+        "album": "I Barely Know Her",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/7qjZnBKE73H4Oxkopwulqe"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=c8zq4kAn_O0"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02d2eb391e0b3c3bc21c127db6"
+    },
+    {
+        "title": "Duvet",
+        "artist": "bôa",
+        "album": "Twilight",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/42qNWdLKCI41S4uzfamhFM"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=Ava0duwBsZo"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02948506eef3b3350b2385ef51"
+    },
+    {
+        "title": "Heavy",
+        "artist": "The Marías",
+        "album": "CINEMA",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/1ShRHPAiiIrh0arZbSFmx1"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=1BCqCgamowo"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02ec93734d42345154b422c8d5"
+    },
+    {
+        "title": "Fourth of July",
+        "artist": "Sufjan Stevens",
+        "album": "Carrie & Lowell",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/5Qnrgqy1pAm9GyNQOgyVFz"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=0qLXf31Cawk"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02820e2ac14772ae3162c6d479"
+    },
+    {
+        "title": "Mrs Magic",
+        "artist": "Strawberry Guy",
+        "album": "Mrs Magic",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/0TZejo18HlJ86OrWNsXKnw"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=m4SyfrcsE0Q"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e024695126ef47156001851e95c"
+    },
+    {
+        "title": "welcome and goodbye",
+        "artist": "Dream, Ivory",
+        "album": "welcome and goodbye",
+        "urls": [
+            {
+                "type": "spotify",
+                "url": "https://open.spotify.com/track/00RLNHc2jkEjUoCUlFgPVT"
+            },
+            {
+                "type": "youtube",
+                "url": "https://www.youtube.com/watch?v=DWJh0Dny5Ug"
+            }
+        ],
+        "image": "https://i.scdn.co/image/ab67616d00001e02ec5c5ec0da8942e4b03254f3"
+    },
+    {
         "title": "Sienna",
         "artist": "The Marías",
         "album": "Submarine",
