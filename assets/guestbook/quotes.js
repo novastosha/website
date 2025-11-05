@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("https://api.sajed.dev/quotes", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Accept": "application/json",
                 },
-                body: JSON.stringify(data),
+                body: new URLSearchParams(data),
             });
 
             if (response.ok) {
