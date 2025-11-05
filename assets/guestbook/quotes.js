@@ -1,35 +1,79 @@
-document.getElementById("submit-link").addEventListener("click", async function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("guestbook-form");
+    const responseEl = document.getElementById("form-response");
+    const submitButton = document.getElementById("submit-button");
 
-    const form = document.getElementById("message-form");
-    const formData = new FormData(form);
-    const responseBox = document.getElementById("form-response");
-
-    // Grab the Turnstile token
-    const tokenInput = document.querySelector('input[name="cf-turnstile-response"]');
-    if (!tokenInput || !tokenInput.value) {
-        responseBox.textContent = "Please complete the verification.";
-        responseBox.className = "error";
+    if (!form || !responseEl || !submitButton) {
+        console.error("Guestbook form elements not found.");
         return;
     }
 
-    try {
-        const res = await fetch(form.action, {
-            method: "POST",
-            body: formData
-        });
-        const json = await res.json();
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        // Disable button
+        submitButton.disabled = true;
+        submitButton.textContent = "[ Submitting... ]";
+        responseEl.textContent = "";
+        responseEl.className = "";
 
-        if (json.success) {
-            responseBox.textContent = "Thank you! Your message is now in the guestbook.";
-            responseBox.className = "success";
-            form.reset();
-        } else {
-            responseBox.textContent = json.error || "Something went wrong.";
-            responseBox.className = "error";
+        // Get form data
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name") || "anonymous",
+            website: formData.get("website") || "",
+            message: formData.get("message"),
+            "cf-turnstile-response": formData.get("cf-turnstile-response")
+        };
+
+        // Basic validation
+        if (!data.message) {
+            setResponse("Message cannot be empty.", "error");
+            submitButton.disabled = false;
+            submitButton.textContent = "[ Submit ]";
+            return;
         }
-    } catch (err) {
-        responseBox.textContent = "Network error. Please try again.";
-        responseBox.className = "error";
+
+        if (!data["cf-turnstile-response"]) {
+            setResponse("Please complete the CAPTCHA.", "error");
+            submitButton.disabled = false;
+            submitButton.textContent = "[ Submit ]";
+            return;
+        }
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                setResponse("Success! Your message has been submitted.", "success");
+                form.reset();
+                // Reset turnstile widget
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
+            } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.error || errorData.message || "An unknown error occurred.";
+                setResponse(`Error: ${errorMessage}`, "error");
+            }
+
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setResponse("Network error. Please try again.", "error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "[ Submit ]";
+        }
+    });
+
+    function setResponse(message, type) {
+        responseEl.textContent = message;
+        responseEl.className = type; // 'success' or 'error'
     }
 });

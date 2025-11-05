@@ -6,6 +6,11 @@
     <meta name="author" content="S. S.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="my homepage!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
     <title>sajed.dev</title>
     <script>
@@ -44,7 +49,7 @@
 
         window.onload = performRedirect;
 
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const link = document.getElementById("manual-redirect-link");
             const dUrl = getDestUrl();
             if (link && dUrl) {
@@ -60,14 +65,14 @@
                 for (const key in destMap) {
                     if (destMap.hasOwnProperty(key)) {
                         const li = document.createElement("li");
-                        
+
                         const displayName = atob(destMap[key][0]);
                         const encodedUrl = atob(destMap[key][1]);
                         const shouldDisplay = destMap[key][2];
                         if (!shouldDisplay) continue;
                         li.innerHTML = `<b>${displayName}:</b> <a href="${encodedUrl}">${encodedUrl}</a>`;
                         li.style.display = "list-item";
-                    
+
                         ul.appendChild(li);
                     }
                 }
@@ -76,12 +81,103 @@
     </script>
 </head>
 
-<body>
-    <p id="redirect-message">Redirecting... If you are not redirected, please enable Javascript in your browser settings or try <a id="manual-redirect-link" href="#">clicking here</a></p>
 
-    <div id="content" style="display:none;">
-        <h1>my other links: </h1>
-        <ul id="possible-destinations"></ul>
-    </div>
+<body id="top">
+
+    <header class="site-header">
+        <a href="#top" class="logo">sajed.dev</a>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-toggle" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
+
+    <main>
+
+        <p id="redirect-message">If you are not redirected automatically, <a id="manual-redirect-link" href="#">click
+                here</a>.</p>
+
+        <section id="intro" class="container">
+            <div id="content" style="display: none;">
+                <h1>My Other Links:</h1>
+                <ul id="possible-destinations"></ul>
+
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <footer class="site-footer">
+        <p>sajed.dev // 2025 // Website sources available at: <a
+                href="https://git.sajed.dev/website">git.sajed.dev/website</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const navLinks = document.querySelectorAll('.mobile-nav a');
+            const body = document.body;
+
+            // Function to toggle the menu
+            const toggleMenu = () => {
+                body.classList.toggle('menu-open');
+            };
+
+            // Toggle menu on hamburger click
+            menuToggle.addEventListener('click', toggleMenu);
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (body.classList.contains('menu-open')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // --- Auto-scroll content duplication ---
+            // Duplicates content for a seamless loop
+
+            function duplicateScrollContent(containerSelector) {
+                const scrollContainer = document.querySelector(containerSelector);
+                if (scrollContainer) {
+                    const scrollWrapper = scrollContainer.querySelector('.scroll-wrapper');
+                    const content = scrollWrapper.innerHTML;
+                    scrollWrapper.innerHTML += content;
+                }
+            }
+
+            // NOTE: The HTML above *already* has the content duplicated
+            // for a perfect monolithic file. If you were to add/remove
+            // items later, you would either:
+            // 1. Manually duplicate the new set in the HTML.
+            // 2. OR, remove the duplicated set from the HTML and
+            //    un-comment the lines below to do it with JS.
+
+            // duplicateScrollContent('.music-scroll');
+            // duplicateScrollContent('.guestbook-scroll');
+            // duplicateScrollContent('.webring-scroll');
+        });
+    </script>
+
 </body>
+
 </html>

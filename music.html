@@ -7,82 +7,7 @@
     <meta name="author" content="S. S.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="my music page!">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --text-color: #ffffff;
-            --bg-color: #000000;
-            --accent-color: #00ccff;
-        }
-
-        html {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
-            background: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        body {
-            max-width: 768px;
-            margin: 1em auto;
-            padding: 1em;
-        }
-
-        #note-intensity {
-            width: 200px;
-            margin-left: 1rem;
-            accent-color: var(--accent-color);
-        }
-
-        label[for="note-intensity"] {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
-            margin-right: 0.5rem;
-        }
-
-        #navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        #navbar-links b:after {
-            content: "|";
-            margin: 0 .5rem;
-        }
-
-        #navbar-links b:last-child:after {
-            content: "";
-        }
-
-        a,
-        a:visited {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            background: var(--accent-color);
-            color: black;
-        }
-
-        h1,
-        h2 {
-            margin: 1rem 0;
-            line-height: 1.5;
-        }
-
-        h1:after {
-            content: "=================================================";
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        h2:before {
-            content: "### ";
-        }
-
         .song {
             display: flex;
             align-items: flex-start;
@@ -163,30 +88,67 @@
             }
         }
     </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
 </head>
+<body id="top">
 
-<body>
-    <div id="navbar">
-        <h3>music!</h3>
-        <div id="navbar-links">
-            <b><a href="/">home</a></b>
-            <b><a href="/cat">cat</a></b>
-        </div>
-    </div>
+    <header class="site-header">
+        <a href="#top" class="logo">sajed.dev</a>
 
-    <div id="content">
-        <label for="note-intensity">fun-o-meter: </label>
-        <input type="range" id="note-intensity" min="0" max="50" value="4" />
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
 
-        <h2>my top songs I listen to recently</h2>
-        <p>Last updated: <span id="last-updated"></span></p>
-        <div id="music-list"></div>
-    </div>
+        <button class="menu-toggle" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
 
-    <div id="note-container"></div>
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
 
-    <script src="assets/music.js"></script>
-    <script src="assets/music_particles.js"></script>
+
+    <main>
+
+        <section id="intro" class="container">
+            <div id="content">
+                <label for="note-intensity">fun-o-meter: </label>
+                <input type="range" id="note-intensity" min="0" max="50" value="4" />
+
+                <h2>my top songs I listen to recently</h2>
+                <p>Last updated: <span id="last-updated"></span></p>
+                <div id="music-list"></div>
+            </div>
+
+            <div id="note-container"></div>
+
+            <script src="assets/music.js"></script>
+            <script src="assets/music_particles.js"></script>
+        </section>
+
+
+
+    </main>
+
+    <footer class="site-footer">
+        <p>sajed.dev // 2025 // Website sources available at: <a
+                href="https://git.sajed.dev/website">git.sajed.dev/website</a></p>
+    </footer>
+
+    <script src="https://sajed.dev/assets/common.js"></script>
 
 </body>
 

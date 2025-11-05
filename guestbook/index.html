@@ -3,107 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>sajed's homepage</title>
+    <title>sajed's guestbook</title>
     <meta name="author" content="S. S.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Leave me a message!">
 
-    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/input-compatible-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/guestbook/styles.css">
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
-    <div id="navbar">
+    <nav id="navbar">
         <div>
-            <h1>Leave me a message!</h1>
+            <h1><span class="cat-face">>:3</span> Sign the Guestbook</h1>
         </div>
         <div id="navbar-links">
             <b><a href="/">home</a></b>
         </div>
-    </div>
+    </nav>
 
-    <form id="message-form" method="POST" action="https://api.sajed.dev/quotes">
-        <div class="form-line">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-        </div>
-        <div class="form-line">
-            <label for="website">Website:</label>
-            <input type="url" id="website" name="website">
-            <label>(optional)</label>
-        </div>
-        <div class="form-line">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
+    <main>
+        <form id="guestbook-form" method="POST" action="https://api.sajed.dev/quotes">
+            <div class="form-line">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-line">
+                <label for="website">Website:</label>
+                <input type="url" id="website" name="website">
+                <label>(optional)</label>
+            </div>
+            <div class="form-line">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
 
-        <div id="cf-turnstile" class="cf-turnstile" data-sitekey="0x4AAAAAABtEXsxg_C-SeY32" data-theme="dark"></div>
-        <div>
-            <a href="#" id="submit-link">[ Submit ]</a>
-        </div>
+            <div id="cf-turnstile" class="cf-turnstile" data-sitekey="0x4AAAAAABtEXsxg_C-SeY32" data-theme="dark"></div>
+            
+            <div>
+                <button type="submit" id="submit-button">[ Submit ]</button>
+            </div>
 
-        <div id="form-response"></div>
-    </form>
+            <div id="form-response"></div>
+        </form>
+    </main>
 
-    <style>
-        form {
-            font-family: monospace;
-            margin-top: 1rem;
-        }
-
-        .form-line {
-            margin-bottom: 0.5rem;
-        }
-
-        label {
-            display: inline-block;
-            width: 80px;
-        }
-
-        input,
-        textarea {
-            background: black;
-            color: white;
-            border: 1px solid #888;
-            font-family: monospace;
-            padding: 2px 4px;
-            width: 300px;
-        }
-
-        textarea {
-            height: 80px;
-        }
-
-        #submit-link {
-            display: block;
-            text-align: center;
-            margin-top: 0.5rem;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .cf-turnstile {
-            display: block;
-            margin: 0.6rem auto;
-        }
-
-        #form-response {
-            margin-top: 1rem;
-            font-weight: bold;
-        }
-
-        #form-response.success {
-            color: lime;
-        }
-
-        #form-response.error {
-            color: red;
-        }
-    </style>
-
-    <script src="https://sajed.dev/assets/guestbook/quotes.js"></script>
-
+    <script src="https://sajed.dev/assets/guestbook/quotes.js" defer></script>
 </body>
 
 </html>
