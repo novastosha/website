@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch(form.action, {
+            const response = await fetch("https://api.sajed.dev/quotes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
