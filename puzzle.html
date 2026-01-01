@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
     <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/compress-styles.css">
+
 </head>
 
 <body id="top">
@@ -131,20 +132,25 @@
                                 define it.<br>
                                 • <strong>Ref Cost:</strong> Placing the reference (e.g., $1) costs only <strong>1
                                     unit</strong>.<br>
-                                • <em>Strategy:</em> Only creates profit if the pattern repeats enough to offset the
-                                initial Storage Cost.
+                                • <strong>Automatic:</strong> Defining a pattern automatically replaces ALL instances of
+                                it on the tape.
                             </span>
                         </li>
                     </ul>
 
                     <h3 style="margin-top:15px; font-size: 1rem; border-bottom: 1px dashed #333; padding-bottom:5px;">
-                        TOOLS & CONTROLS</h3>
-                    <ul style="padding-left: 20px; list-style: square;">
-                        <li style="margin-bottom: 5px;">
-                            <strong>Deconstruct:</strong> Unpacks a compressed token back into raw data. Use this to fix
-                            mistakes or re-optimize nested patterns.
-                        </li>
-                    </ul>
+                        OPTIMIZATION STRATEGY</h3>
+                    <p style="font-size: 0.85em; margin-bottom: 10px;">
+                        <strong>Standard:</strong> Define "AAAAAB" as $1.<br>
+                        Cost: 6 (Storage) + 1 (Ref) = 7.
+                    </p>
+                    <p
+                        style="font-size: 0.85em; margin-bottom: 15px; color: var(--accent-green); border-left: 2px solid var(--accent-green); padding-left: 10px;">
+                        <strong>Optimized:</strong> Compress "AAAAA" &rarr; "5A" <em>first</em>.<br>
+                        Then define "5AB" as $1.<br>
+                        Cost: 3 (Storage) + 1 (Ref) = 4.<br>
+                        <em>Tip: Compress the inside of your patterns before defining them!</em>
+                    </p>
 
                     <p
                         style="margin-top: 15px; background: rgba(0,255,192,0.05); padding: 10px; border: 1px solid var(--accent-green);">
@@ -225,11 +231,13 @@
                 <div id="system-message" class="sys-msg"></div>
 
                 <div class="control-panel">
-                    <button class="action-btn" onclick="LZEngine.compressRLE()">
+                    <button class="action-btn" id="btn-rle" onclick="LZEngine.compressRLE()">
                         Run-Length (RLE)
+                        <span id="badge-rle" class="cost-badge"></span>
                     </button>
-                    <button class="action-btn" onclick="LZEngine.definePattern()">
+                    <button class="action-btn" id="btn-pattern" onclick="LZEngine.definePattern()">
                         Define Pattern ($)
+                        <span id="badge-pattern" class="cost-badge"></span>
                     </button>
                     <button class="action-btn" onclick="LZEngine.deconstructToken()">
                         Deconstruct
@@ -273,8 +281,7 @@
     </footer>
 
     <script src="https://sajed.dev/assets/common.js"></script>
-    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=3">    </script>
-
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=4"></script>
 
 
     <script>
