@@ -101,43 +101,63 @@
             </div>
         </div>
 
-        <!-- Instructions Modal -->
         <div class="modal-backdrop" id="instructions-modal">
             <div class="modal">
-                <h2>Instructions & How-to-play</h2>
+                <h2>System Manual & Rules</h2>
                 <div style="font-family: var(--font-mono); font-size: 0.9rem; max-height: 60vh; overflow-y: auto;">
-                    <p><strong>OBJECTIVE:</strong> Reduce the data stream size below the <span
-                            style="color:var(--accent-green)">Target Cost</span>.</p>
+                    <p><strong>OBJECTIVE:</strong> Compress the data until the <span
+                            style="color:var(--accent-green)">Current Cost</span> is lower than the Target.</p>
 
-                    <h3 style="margin-top:15px; font-size: 1rem;">TOOLS:</h3>
-                    <ul style="padding-left: 20px; list-style: square; margin-bottom: 15px;">
-                        <li style="margin-bottom: 8px;">
-                            <strong style="color:var(--accent-green)">RLE (Run-Length Encoding):</strong>
-                            Compress sequential identical characters.<br>
-                            <em style="color:#888; font-size: 0.8em;">Ex: "AAAA" (4 cost) → "4A" (2 cost).</em>
+                    <h3 style="margin-top:15px; font-size: 1rem; border-bottom: 1px dashed #333; padding-bottom:5px;">
+                        THE COST MODEL</h3>
+                    <p style="font-size: 0.85em; margin-bottom: 15px;">Every item on the main tape costs <strong>1
+                            unit</strong>. Your goal is to replace many items with fewer tokens.</p>
+
+                    <ul style="padding-left: 20px; list-style: none; margin-bottom: 15px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color:var(--accent-green)">[RLE] Run-Length Encoding</strong><br>
+                            Compresses sequential identical characters.<br>
+                            <span style="color:#888; font-size: 0.85em;">
+                                • <strong>Cost:</strong> Always <strong>2 units</strong> (1 for count, 1 for char).<br>
+                                • <em>Example:</em> "AAAAA" (5 cost) &rarr; "5A" (2 cost).
+                            </span>
                         </li>
-                        <li style="margin-bottom: 8px;">
-                            <strong style="color:var(--accent-magenta)">PATTERN ($):</strong>
-                            Define a sequence as a reusable variable.<br>
-                            <em style="color:#888; font-size: 0.8em;">Ex: "ABAB" → "$1". Great for repeating complex
-                                segments.</em>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <strong>DECONSTRUCT:</strong>
-                            Break a compressed token back into raw data to re-optimize.
+
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color:var(--accent-magenta)">[PATTERN] Dictionary Definition ($)</strong><br>
+                            Saves a sequence to memory to be used multiple times.<br>
+                            <span style="color:#888; font-size: 0.85em;">
+                                • <strong>Storage Cost:</strong> You pay the cost of the sequence <em>once</em> to
+                                define it.<br>
+                                • <strong>Ref Cost:</strong> Placing the reference (e.g., $1) costs only <strong>1
+                                    unit</strong>.<br>
+                                • <em>Strategy:</em> Only creates profit if the pattern repeats enough to offset the
+                                initial Storage Cost.
+                            </span>
                         </li>
                     </ul>
 
-                    <h3 style="margin-top:15px; font-size: 1rem;">CONTROLS:</h3>
-                    <p>
-                        <strong>Desktop:</strong> Click and drag, or Shift+Click to select range.<br>
-                        <strong>Mobile:</strong> <span style="color:var(--accent-magenta)">Tap Start</span> then <span
-                            style="color:var(--accent-magenta)">Tap End</span> to select a range.
+                    <h3 style="margin-top:15px; font-size: 1rem; border-bottom: 1px dashed #333; padding-bottom:5px;">
+                        TOOLS & CONTROLS</h3>
+                    <ul style="padding-left: 20px; list-style: square;">
+                        <li style="margin-bottom: 5px;">
+                            <strong>Deconstruct:</strong> Unpacks a compressed token back into raw data. Use this to fix
+                            mistakes or re-optimize nested patterns.
+                        </li>
+                    </ul>
+
+                    <p
+                        style="margin-top: 15px; background: rgba(0,255,192,0.05); padding: 10px; border: 1px solid var(--accent-green);">
+                        <strong>Input Controls:</strong><br>
+                        Desktop: <span style="color:var(--text-flicker)">Click & Drag</span> or Shift+Click.<br>
+                        Mobile: <span style="color:var(--accent-magenta)">Tap Start</span> then <span
+                            style="color:var(--accent-magenta)">Tap End</span> to select range.
                     </p>
                 </div>
-                <button class="action-btn" id="closeInstructions" style="margin-top: 20px;">Close</button>
+                <button class="action-btn" id="closeInstructions" style="margin-top: 20px;">ACKNOWLEDGE</button>
             </div>
         </div>
+
 
         <section id="intro" class="container" style="margin-bottom: -40px;">
             <h1 class="center">Compression Puzzle</h1>
@@ -253,9 +273,12 @@
     </footer>
 
     <script src="https://sajed.dev/assets/common.js"></script>
-    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js">    </script>
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=3">    </script>
+
+
 
     <script>
+
         const notice_modal = document.getElementById('data-notice-modal');
         document.getElementById('openNotice').onclick = () => notice_modal.style.display = 'flex';
         document.getElementById('closeNotice').onclick = () => notice_modal.style.display = 'none';
