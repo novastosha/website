@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sajed.dev</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/compress-styles.css">
+</head>
+
+<body id="top">
+
+    <header class="site-header">
+        <a href="#top" class="logo">sajed.dev</a>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#game">Play</a></li>
+                <li><a href="https://sajed.dev">Go to main page</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-toggle" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#game">Play</a></li>
+            <li><a href="https://sajed.dev">Go to main page</a></li>
+        </ul>
+    </nav>
+
+
+    <main>
+
+        <div class="modal-backdrop" id="share-modal">
+            <div class="modal">
+                <h2>Share Solution</h2>
+                <pre id="share-text"
+                    style="background:var(--bg-abyss); padding:10px; font-size:0.8rem; color:var(--accent-green); white-space: pre-wrap;"></pre>
+                <div class="center">
+                    <button class="action-btn" id="copy-share-btn">Copy to Clipboard</button>
+                    <button class="action-btn" style="border-color:#444;"
+                        onclick="document.getElementById('share-modal').style.display='none'">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-backdrop" id="submit-modal">
+            <div class="modal">
+                <h2>Puzzle Solved</h2>
+                <p>Your score: <span id="self-score-submit" style="color: var(--accent-green)"></span> | Target: <span
+                        id="target-score-submit"></span></p>
+
+                <div id="modal-status-msg"
+                    style="margin-bottom: 15px; font-family: var(--font-mono); font-size: 0.85rem; min-height: 1.2em; text-align: center;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display:block; margin-bottom:5px; color:var(--accent-green); font-size: 0.8rem;">Username
+                        (optional):</label>
+                    <input type="text" id="username-input" maxlength="15" placeholder="Anonymous"
+                        style="width:100%; padding:10px; background:var(--bg-abyss); border:1px solid #333; color:var(--text-main); font-family:var(--font-mono);">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="action-btn" id="confirm-submit">Submit Score</button>
+                    <button class="action-btn" id="share-btn-modal"
+                        style="border-color: var(--accent-magenta); color: var(--accent-magenta);">Share Result</button>
+                    <button class="action-btn" style="border-color:#444; grid-column: span 2;"
+                        onclick="document.getElementById('submit-modal').style.display='none'">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Data Notice Modal -->
+        <div class="modal-backdrop" id="data-notice-modal">
+            <div class="modal">
+                <h2>Data Notice</h2>
+                <p>
+                    - This game runs entirely client-side after fetching the daily puzzle's metadata.
+                    <br>
+                    - Unless you choose to share your scores or solutions, no data is sent to any server.
+                </p>
+                <button class="action-btn" id="closeNotice">Close</button>
+            </div>
+        </div>
+
+        <!-- Instructions Modal -->
+        <div class="modal-backdrop" id="instructions-modal">
+            <div class="modal">
+                <h2>Instructions & How-to-play</h2>
+                <div style="font-family: var(--font-mono); font-size: 0.9rem; max-height: 60vh; overflow-y: auto;">
+                    <p><strong>OBJECTIVE:</strong> Reduce the data stream size below the <span
+                            style="color:var(--accent-green)">Target Cost</span>.</p>
+
+                    <h3 style="margin-top:15px; font-size: 1rem;">TOOLS:</h3>
+                    <ul style="padding-left: 20px; list-style: square; margin-bottom: 15px;">
+                        <li style="margin-bottom: 8px;">
+                            <strong style="color:var(--accent-green)">RLE (Run-Length Encoding):</strong>
+                            Compress sequential identical characters.<br>
+                            <em style="color:#888; font-size: 0.8em;">Ex: "AAAA" (4 cost) → "4A" (2 cost).</em>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <strong style="color:var(--accent-magenta)">PATTERN ($):</strong>
+                            Define a sequence as a reusable variable.<br>
+                            <em style="color:#888; font-size: 0.8em;">Ex: "ABAB" → "$1". Great for repeating complex
+                                segments.</em>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <strong>DECONSTRUCT:</strong>
+                            Break a compressed token back into raw data to re-optimize.
+                        </li>
+                    </ul>
+
+                    <h3 style="margin-top:15px; font-size: 1rem;">CONTROLS:</h3>
+                    <p>
+                        <strong>Desktop:</strong> Click and drag, or Shift+Click to select range.<br>
+                        <strong>Mobile:</strong> <span style="color:var(--accent-magenta)">Tap Start</span> then <span
+                            style="color:var(--accent-magenta)">Tap End</span> to select a range.
+                    </p>
+                </div>
+                <button class="action-btn" id="closeInstructions" style="margin-top: 20px;">Close</button>
+            </div>
+        </div>
+
+        <section id="intro" class="container" style="margin-bottom: -40px;">
+            <h1 class="center">Compression Puzzle</h1>
+            <p class="center" style="max-width:fit-content; margin: 0 auto;">
+                <t style="color:var(--accent-magenta)">Compression Puzzle</t> is a logic game about structure.
+                <br>
+                You are given a fixed target string. Your goal is to recreate it exactly using the smallest possible
+                description — by <t style="color:var(--accent-green)">grouping patterns, repeating runs, and defining
+                    reusable pieces</t>.
+                <br>
+                <br>
+                <i style="color:var(--accent-magenta)">Can you describe the same data using less information?</i>
+            </p>
+
+            <div class="center" style="margin-top: 20px;">
+                <label for="difficulty-select" style="margin-right: 10px; font-family: var(--font-pixel);">Select
+                    Difficulty:</label>
+                <select id="difficulty-select" class="diff-select">
+                    <option value="daily" selected>Daily Challenge</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="expert">Expert</option>
+                </select>
+            </div>
+            <div class="center">
+                <button class="action-btn" id="openNotice">
+                    Data Policy
+                </button>
+                <button class="action-btn" style="border-color:var(--accent-magenta); color:var(--accent-magenta)"
+                    onclick="document.getElementById('game').scrollIntoView({behavior: 'smooth'}); startGame()">
+                    Play
+                </button>
+                <button class="action-btn" id="openInstructions">Instructions</button>
+            </div>
+
+        </section>
+
+        <section id="game" class="container">
+            <div class="game-ui" id="game-interface" style="display:none;">
+                <div class="dashboard-header">
+                    <div class="metric-group" style="margin-right: -7.5%;">
+                        <div class="metric">
+                            <span>Target Cost</span>
+                            <strong id="target-score">00</strong>
+                        </div>
+                        <div class="metric">
+                            <span>Current Cost</span>
+                            <strong id="current-score">00</strong>
+                        </div>
+                    </div>
+
+                    <div id="submit-div" class="metric" style="margin-bottom: 20px;">
+                    </div>
+
+                    <div class="metric">
+                        <span>Compression</span>
+                        <strong id="status-indicator" style="color:var(--accent-green)">??</strong>
+                    </div>
+                </div>
+
+                <div id="tape-container" class="tape-display">
+                </div>
+
+                <div id="system-message" class="sys-msg"></div>
+
+                <div class="control-panel">
+                    <button class="action-btn" onclick="LZEngine.compressRLE()">
+                        Run-Length (RLE)
+                    </button>
+                    <button class="action-btn" onclick="LZEngine.definePattern()">
+                        Define Pattern ($)
+                    </button>
+                    <button class="action-btn" onclick="LZEngine.deconstructToken()">
+                        Deconstruct
+                    </button>
+                    <button class="action-btn" onclick="LZEngine.undo()"
+                        style="border-color:var(--accent-magenta); color:var(--accent-magenta)">
+                        Undo
+                    </button>
+                </div>
+
+                <div class="buffer-zone">
+                    <h3 style="font-size: 1rem; margin-bottom: 5px;">CURRENTLY DEFINED PATTERNS</h3>
+                    <ul id="dict-display" class="buffer-list"></ul>
+                </div>
+
+                <div class="center" style="margin-top: 20px;">
+                    <button class="action-btn" id="toggle-lb-btn" onclick="LZEngine.toggleLeaderboard()"
+                        style="font-size: 0.7rem; border-style: dotted;">
+                        View Leaderboard
+                    </button>
+                </div>
+
+
+                <div id="leaderboard-zone"
+                    style="display:none; margin-top: 15px; border-top: 1px dashed #333; padding-top: 15px;">
+                    <h3 class="center" style="font-size: 0.8rem; color: var(--accent-magenta);">RANKINGS</h3>
+                    <div id="leaderboard-content" style="font-family: var(--font-mono); font-size: 0.75rem;"></div>
+                </div>
+            </div>
+
+            <div id="loader" class="center" style="font-family: var(--font-pixel); display: none;">
+                Retreiving puzzle...
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p class="center" style="max-width: fit-content; margin: 0 auto;">sajed.dev © 2025 <a
+                href="https://git.sajed.dev/website">git.sajed.dev/website</a></p>
+    </footer>
+
+    <script src="https://sajed.dev/assets/common.js"></script>
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js">    </script>
+
+    <script>
+        const notice_modal = document.getElementById('data-notice-modal');
+        document.getElementById('openNotice').onclick = () => notice_modal.style.display = 'flex';
+        document.getElementById('closeNotice').onclick = () => notice_modal.style.display = 'none';
+
+        const instructions_modal = document.getElementById('instructions-modal');
+        document.getElementById('openInstructions').onclick = () => instructions_modal.style.display = 'flex';
+        document.getElementById('closeInstructions').onclick = () => instructions_modal.style.display = 'none';
+    </script>
+</body>
+
+</html>
