@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
     <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/compress-styles.css">
-
 </head>
 
 <body id="top">
@@ -46,16 +45,36 @@
 
 
     <main>
-
         <div class="modal-backdrop" id="share-modal">
             <div class="modal">
                 <h2>Share Solution</h2>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="share-include-steps" onchange="LZEngine.updateShareText()">
+                    <label for="share-include-steps" class="custom-check-box">
+                        <!-- Pixelated checkmark (24x24 grid) -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"
+                            shape-rendering="crispEdges">
+                            <g fill="currentColor">
+                                <!-- Blocky / pixel check -->
+                                <rect x="4" y="12" width="3" height="3" />
+                                <rect x="7" y="15" width="3" height="3" />
+                                <rect x="10" y="12" width="3" height="3" />
+                                <rect x="13" y="9" width="3" height="3" />
+                                <rect x="16" y="6" width="3" height="3" />
+                            </g>
+                        </svg>
+                    </label>
+                    <span class="checkbox-label">Include Spoiler Steps (||hidden||)</span>
+                </div>
+
                 <pre id="share-text"
-                    style="background:var(--bg-abyss); padding:10px; font-size:0.8rem; color:var(--accent-green); white-space: pre-wrap;"></pre>
+                    style="background:var(--bg-abyss); padding:10px; font-size:0.8rem; color:var(--accent-green); white-space: pre-wrap; margin-bottom: 20px;"></pre>
+
                 <div class="center">
                     <button class="action-btn" id="copy-share-btn">Copy to Clipboard</button>
                     <button class="action-btn" style="border-color:#444;"
-                        onclick="document.getElementById('share-modal').style.display='none'">Close</button>
+                        onclick="document.getElementById('share-modal').style.display='none'; document.getElementById('submit-modal').style.display='flex'">Close</button>
                 </div>
             </div>
         </div>
@@ -151,13 +170,15 @@
                         Cost: 3 (Storage) + 1 (Ref) = 4.<br>
                         <em>Tip: Compress the inside of your patterns before defining them!</em>
                     </p>
-
                     <p
                         style="margin-top: 15px; background: rgba(0,255,192,0.05); padding: 10px; border: 1px solid var(--accent-green);">
                         <strong>Input Controls:</strong><br>
-                        Desktop: <span style="color:var(--text-flicker)">Click & Drag</span> or Shift+Click.<br>
-                        Mobile: <span style="color:var(--accent-magenta)">Tap Start</span> then <span
-                            style="color:var(--accent-magenta)">Tap End</span> to select range.
+                        • <span style="color:var(--text-flicker)">Double-Click or Double-Tap:</span> <strong>Smart Select</strong> —
+                        automatically selects the largest continuous sequence of identical symbols.<br>
+                        • <span style="color:var(--text-flicker)">Click & Drag:</span> Select a custom range
+                        (Desktop).<br>
+                        • <span style="color:var(--accent-magenta)">Tap Start & End:</span> Select a range
+                        (Mobile/Touch).
                     </p>
                 </div>
                 <button class="action-btn" id="closeInstructions" style="margin-top: 20px;">ACKNOWLEDGE</button>
@@ -281,8 +302,7 @@
     </footer>
 
     <script src="https://sajed.dev/assets/common.js"></script>
-    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=4"></script>
-
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=6"></script>
 
     <script>
 
