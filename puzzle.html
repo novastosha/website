@@ -173,7 +173,8 @@
                     <p
                         style="margin-top: 15px; background: rgba(0,255,192,0.05); padding: 10px; border: 1px solid var(--accent-green);">
                         <strong>Input Controls:</strong><br>
-                        • <span style="color:var(--text-flicker)">Double-Click or Double-Tap:</span> <strong>Smart Select</strong> —
+                        • <span style="color:var(--text-flicker)">Double-Click or Double-Tap:</span> <strong>Smart
+                            Select</strong> —
                         automatically selects the largest continuous sequence of identical symbols.<br>
                         • <span style="color:var(--text-flicker)">Click & Drag:</span> Select a custom range
                         (Desktop).<br>
@@ -302,8 +303,7 @@
     </footer>
 
     <script src="https://sajed.dev/assets/common.js"></script>
-    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=6"></script>
-
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=7"></script>
     <script>
 
         const notice_modal = document.getElementById('data-notice-modal');
@@ -313,6 +313,98 @@
         const instructions_modal = document.getElementById('instructions-modal');
         document.getElementById('openInstructions').onclick = () => instructions_modal.style.display = 'flex';
         document.getElementById('closeInstructions').onclick = () => instructions_modal.style.display = 'none';
+    </script>
+    <script>
+        (function optimizeMobile() {
+            // 1. Inject CSS for Sticky Dock
+            const style = document.createElement('style');
+            style.innerHTML = `
+        @media (max-width: 768px) {
+            /* Fix Control Panel to Bottom */
+            .control-panel {
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                z-index: 999;
+                background: var(--bg-abyss);
+                border-top: 2px solid var(--accent-magenta);
+                padding: 10px 5px;
+                display: flex;
+                gap: 5px;
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+                justify-content: space-evenly;
+            }
+            
+            /* Adjust Buttons for Touch Targets */
+            .control-panel .action-btn {
+                font-size: 0.75rem;
+                padding: 12px 0;
+                margin: 0;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                line-height: 1.2;
+                height: 50px;
+            }
+
+            /* Prevent Tape from being hidden behind dock */
+            .game-ui {
+                padding-bottom: 90px;
+            }
+
+            /* Floating Toast Notification (Above Dock) */
+            #system-message {
+                position: fixed !important;
+                bottom: 130px !important; /* Lifted above the 70px dock */
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 90% !important;
+                max-width: 400px;
+                z-index: 2001;
+                opacity: 0.75;
+                background: rgba(10, 10, 15, 0.95);
+                border: 1px solid var(--accent-green);
+                box-shadow: 0 0 15px var(--accent-green);
+                pointer-events: none;
+                text-align: center;
+            }
+        }
+    `;
+            // when the systemmessage is shown, it should appear above the dock, otherwise make invisible after 3s
+            document.getElementById('system-message').addEventListener('animationstart', (e) => {
+                if (e.animationName === 'fadeInToast') {
+                    setTimeout(() => {
+                        document.getElementById('system-message').style.animation = 'fadeOutToast 1s forwards';
+                    }, 3000);
+                }
+            });
+
+            document.head.appendChild(style);
+
+            // 2. Shorten Button Text for Mobile
+            if (window.innerWidth <= 768) {
+                const btnRLE = document.getElementById('btn-rle');
+                const btnPat = document.getElementById('btn-pattern');
+                // Preserve badges if they exist
+                const badgeRLE = document.getElementById('badge-rle');
+                const badgePat = document.getElementById('badge-pattern');
+
+                if (btnRLE) {
+                    btnRLE.innerHTML = 'RLE ';
+                    if (badgeRLE) btnRLE.appendChild(badgeRLE);
+                }
+                if (btnPat) {
+                    btnPat.innerHTML = 'Define $ ';
+                    if (badgePat) btnPat.appendChild(badgePat);
+                }
+
+                const allBtns = document.querySelectorAll('.control-panel .action-btn');
+                allBtns.forEach(btn => {
+                    if (btn.innerText.includes('Deconstruct')) btn.innerText = 'Unpack';
+                });
+            }
+        })();
     </script>
 </body>
 
