@@ -69,7 +69,7 @@
                 </div>
 
                 <pre id="share-text"
-                    style="background:var(--bg-abyss); padding:10px; font-size:0.8rem; color:var(--accent-green); white-space: pre-wrap; margin-bottom: 20px;"></pre>
+                    style="background:var(--bg-abyss); padding:10px; font-size:0.8rem; color:var(--accent-green); white-space: pre-wrap; margin-bottom: 20px; max-height: 30vh; overflow-y: auto;"></pre>
 
                 <div class="center">
                     <button class="action-btn" id="copy-share-btn">Copy to Clipboard</button>
@@ -316,62 +316,82 @@
     </script>
     <script>
         (function optimizeMobile() {
-            // 1. Inject CSS for Sticky Dock
+            // 1. Inject CSS for Sticky Dock & UI Fixes
             const style = document.createElement('style');
             style.innerHTML = `
-        @media (max-width: 768px) {
-            /* Fix Control Panel to Bottom */
-            .control-panel {
-                position: fixed;
-                bottom: 0; left: 0; right: 0;
-                z-index: 999;
-                background: var(--bg-abyss);
-                border-top: 2px solid var(--accent-magenta);
-                padding: 10px 5px;
-                display: flex;
-                gap: 5px;
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-                justify-content: space-evenly;
-            }
-            
-            /* Adjust Buttons for Touch Targets */
-            .control-panel .action-btn {
-                font-size: 0.75rem;
-                padding: 12px 0;
-                margin: 0;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                line-height: 1.2;
-                height: 50px;
-            }
-
-            /* Prevent Tape from being hidden behind dock */
-            .game-ui {
-                padding-bottom: 90px;
-            }
-
-            /* Floating Toast Notification (Above Dock) */
-            #system-message {
-                position: fixed !important;
-                bottom: 130px !important; /* Lifted above the 70px dock */
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                width: 90% !important;
-                max-width: 400px;
-                z-index: 2001;
-                opacity: 0.75;
-                background: rgba(10, 10, 15, 0.95);
-                border: 1px solid var(--accent-green);
-                box-shadow: 0 0 15px var(--accent-green);
-                pointer-events: none;
-                text-align: center;
-            }
+    @media (max-width: 768px) {
+        /* Fix Control Panel to Bottom */
+        .control-panel {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 999;
+            background: var(--bg-abyss);
+            border-top: 2px solid var(--accent-magenta);
+            padding: 10px 5px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+            justify-content: space-evenly;
+            transition: transform 0.3s ease;
         }
-    `;
-            // when the systemmessage is shown, it should appear above the dock, otherwise make invisible after 3s
+
+        /* HIDE DOCK WHEN MODAL IS OPEN */
+        body.modal-active .control-panel {
+            display: none !important;
+        }
+
+        /* HIDE System message */
+        body.modal-active .sys-msg {
+            display: none !important;
+        }
+
+
+        /* Adjust Buttons for Touch Targets */
+        .control-panel .action-btn {
+            font-size: 0.75rem;
+            padding: 12px 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.2;
+            height: 50px;
+        }
+
+        /* Prevent Tape from being hidden behind dock */
+        .game-ui {
+            padding-bottom: 90px;
+        }
+
+
+        /* Floating Toast Notification (Above Dock) */
+        #system-message {
+            position: fixed !important;
+            bottom: 130px !important; /* Lifted above the 70px dock */
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 90% !important;
+            max-width: 400px;
+            z-index: 2001;
+            opacity: 0.75;
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid var(--accent-green);
+            box-shadow: 0 0 15px var(--accent-green);
+            pointer-events: none;
+            text-align: center;
+        }
+        
+        /* HIDE SYSTEM MESSAGE IF EMPTY */
+        #system-message:empty {
+            display: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+`;
+            // Animation cleanup for system message
             document.getElementById('system-message').addEventListener('animationstart', (e) => {
                 if (e.animationName === 'fadeInToast') {
                     setTimeout(() => {
@@ -382,7 +402,29 @@
 
             document.head.appendChild(style);
 
-            // 2. Shorten Button Text for Mobile
+            // 2. Logic to detect Modals and hide Mobile Dock
+            const modalObserver = new MutationObserver((mutations) => {
+                let isAnyModalOpen = false;
+                document.querySelectorAll('.modal-backdrop').forEach(modal => {
+                    const style = window.getComputedStyle(modal);
+                    if (modal.style.display === 'flex' || style.display === 'flex') {
+                        isAnyModalOpen = true;
+                    }
+                });
+
+                if (isAnyModalOpen) {
+                    document.body.classList.add('modal-active');
+                } else {
+                    document.body.classList.remove('modal-active');
+                }
+            });
+
+            // Attach observer to all modals
+            document.querySelectorAll('.modal-backdrop').forEach(el => {
+                modalObserver.observe(el, { attributes: true, attributeFilter: ['style'] });
+            });
+
+            // 3. Shorten Button Text for Mobile
             if (window.innerWidth <= 768) {
                 const btnRLE = document.getElementById('btn-rle');
                 const btnPat = document.getElementById('btn-pattern');
