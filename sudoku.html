@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="S. S.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Local Cyberpunk Sudoku">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/styles.css">
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/sudoku-styles.css">
+    <title>sajed.dev - Sudoku</title>
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="#top" class="logo">sajed.dev</a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#game">Play</a></li>
+                <li><a href="https://sajed.dev">Go to main page</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Open navigation menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#game">Play</a></li>
+            <li><a href="https://sajed.dev">Go to main page</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="game" class="container" style="padding-top: 20px;">
+            <div class="game-wrapper">
+
+                <div class="settings-bar">
+                    <select id="difficulty" class="retro-select" onchange="game.ui.updateDifficultyColor()">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <select id="mistake-mode" class="retro-select">
+                        <option value="infinite">∞ Mistakes</option>
+                        <option value="3">3 Mistakes</option>
+                        <option value="1">Sudden Death</option>
+                    </select>
+                    <button class="retro-btn" onclick="game.newGame()">Start</button>
+                    <button class="retro-btn" onclick="game.ui.toggleLoadModal()">Load Game</button>
+                </div>
+
+                <div class="hud-panel">
+                    <div class="hud-item">
+                        <span class="hud-label">Difficulty</span>
+                        <span id="stat-diff" class="hud-value diff-medium">MED</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Score</span>
+                        <span id="stat-score" class="hud-value">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Mistakes</span>
+                        <span id="stat-mistakes" class="hud-value">0/∞</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Time</span>
+                        <span id="stat-time" class="hud-value">00:00</span>
+                    </div>
+                </div>
+
+                <div id="sudoku-board" class="sudoku-board"></div>
+
+                <div class="action-bar">
+                    <button class="retro-btn" onclick="game.undo()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 14L4 9l5-5" />
+                            <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11" />
+                        </svg>
+                        Undo
+                    </button>
+                    <button class="retro-btn" id="btn-pen" onclick="game.togglePenMode()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                            <circle cx="11" cy="11" r="2" />
+                        </svg>
+                        Pen Mode
+                    </button>
+                    <button class="retro-btn magenta-border" onclick="game.getHint()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21h6v-5.5a4.5 4.5 0 1 0-9 0V21zm3-9a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
+                        </svg>
+                        Hint
+                        <span class="cost-badge">-100</span>
+                    </button>
+                </div>
+
+                <div class="numpad" id="numpad"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="center" style="max-width: fit-content; margin: 0 auto;">sajed.dev © 2026 <a
+                href="https://git.sajed.dev/website">git.sajed.dev/website</a></p>
+    </footer>
+
+    <div id="load-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title">Saved Sessions</h2>
+            <ul id="saved-games-list" class="save-list"></ul>
+            <button class="retro-btn" style="width:100%"
+                onclick="document.getElementById('load-modal').style.display='none'">Close</button>
+        </div>
+    </div>
+
+    <div id="msg-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="msg-title" class="modal-title">Report</h2>
+            <p id="msg-body" style="margin-bottom: 20px; font-family: var(--font-mono);"></p>
+            <button class="retro-btn" style="width:100%"
+                onclick="document.getElementById('msg-modal').style.display='none'; game.newGame()">Start a new
+                game</button>
+        </div>
+    </div>
+
+
+    <script src="https://sajed.dev/assets/common.js"></script>
+    <script src="https://cdn.sajed.dev/web/assets/sudoku-engine.js"></script>
+</body>
+
+</html>
