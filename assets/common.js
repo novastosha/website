@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initThemeEngine() {
-    const SECRET_CODE = 'colour me please!!';
+    const SECRET_CODE = 'colormeplease';
     let inputSequence = [];
     let modalCreated = false;
 
