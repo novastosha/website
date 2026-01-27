@@ -52,11 +52,9 @@
                 <div class="checkbox-container">
                     <input type="checkbox" id="share-include-steps" onchange="LZEngine.updateShareText()">
                     <label for="share-include-steps" class="custom-check-box">
-                        <!-- Pixelated checkmark (24x24 grid) -->
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"
                             shape-rendering="crispEdges">
                             <g fill="currentColor">
-                                <!-- Blocky / pixel check -->
                                 <rect x="4" y="12" width="3" height="3" />
                                 <rect x="7" y="15" width="3" height="3" />
                                 <rect x="10" y="12" width="3" height="3" />
@@ -108,7 +106,6 @@
         </div>
 
 
-        <!-- Data Notice Modal -->
         <div class="modal-backdrop" id="data-notice-modal">
             <div class="modal">
                 <h2>Data Notice</h2>
@@ -123,7 +120,7 @@
 
         <div class="modal-backdrop" id="instructions-modal">
             <div class="modal">
-                <h2>System Manual & Rules</h2>
+                <h2>Manual & Rules</h2>
                 <div style="font-family: var(--font-mono); font-size: 0.9rem; max-height: 60vh; overflow-y: auto;">
                     <p><strong>OBJECTIVE:</strong> Compress the data until the <span
                             style="color:var(--accent-green)">Current Cost</span> is lower than the Target.</p>
@@ -276,6 +273,11 @@
                 </div>
 
                 <div class="center" style="margin-top: 20px;">
+                    <button class="action-btn" id="skip-tutorial-btn" onclick="LZEngine.skipTutorial()"
+                        style="display:none; border-color:var(--text-flicker); color:var(--text-flicker); margin-bottom: 10px;">
+                        Skip Tutorial
+                    </button>
+
                     <button class="action-btn" id="toggle-lb-btn" onclick="LZEngine.toggleLeaderboard()"
                         style="font-size: 0.7rem; border-style: dotted;">
                         View Leaderboard
@@ -303,151 +305,8 @@
     </footer>
 
     <script src="https://sajed.dev/assets/common.js"></script>
-    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=7"></script>
-    <script>
-
-        const notice_modal = document.getElementById('data-notice-modal');
-        document.getElementById('openNotice').onclick = () => notice_modal.style.display = 'flex';
-        document.getElementById('closeNotice').onclick = () => notice_modal.style.display = 'none';
-
-        const instructions_modal = document.getElementById('instructions-modal');
-        document.getElementById('openInstructions').onclick = () => instructions_modal.style.display = 'flex';
-        document.getElementById('closeInstructions').onclick = () => instructions_modal.style.display = 'none';
-    </script>
-    <script>
-        (function optimizeMobile() {
-            // 1. Inject CSS for Sticky Dock & UI Fixes
-            const style = document.createElement('style');
-            style.innerHTML = `
-    @media (max-width: 768px) {
-        /* Fix Control Panel to Bottom */
-        .control-panel {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            z-index: 999;
-            background: var(--bg-abyss);
-            border-top: 2px solid var(--accent-magenta);
-            padding: 10px 5px;
-            display: flex;
-            gap: 5px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-            justify-content: space-evenly;
-            transition: transform 0.3s ease;
-        }
-
-        /* HIDE DOCK WHEN MODAL IS OPEN */
-        body.modal-active .control-panel {
-            display: none !important;
-        }
-
-        /* HIDE System message */
-        body.modal-active .sys-msg {
-            display: none !important;
-        }
-
-
-        /* Adjust Buttons for Touch Targets */
-        .control-panel .action-btn {
-            font-size: 0.75rem;
-            padding: 12px 0;
-            margin: 0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.2;
-            height: 50px;
-        }
-
-        /* Prevent Tape from being hidden behind dock */
-        .game-ui {
-            padding-bottom: 90px;
-        }
-
-
-        /* Floating Toast Notification (Above Dock) */
-        #system-message {
-            position: fixed !important;
-            bottom: 130px !important; /* Lifted above the 70px dock */
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: 90% !important;
-            max-width: 400px;
-            z-index: 2001;
-            opacity: 0.75;
-            background: rgba(10, 10, 15, 0.95);
-            border: 1px solid var(--accent-green);
-            box-shadow: 0 0 15px var(--accent-green);
-            pointer-events: none;
-            text-align: center;
-        }
-        
-        /* HIDE SYSTEM MESSAGE IF EMPTY */
-        #system-message:empty {
-            display: none !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    }
-`;
-            // Animation cleanup for system message
-            document.getElementById('system-message').addEventListener('animationstart', (e) => {
-                if (e.animationName === 'fadeInToast') {
-                    setTimeout(() => {
-                        document.getElementById('system-message').style.animation = 'fadeOutToast 1s forwards';
-                    }, 3000);
-                }
-            });
-
-            document.head.appendChild(style);
-
-            // 2. Logic to detect Modals and hide Mobile Dock
-            const modalObserver = new MutationObserver((mutations) => {
-                let isAnyModalOpen = false;
-                document.querySelectorAll('.modal-backdrop').forEach(modal => {
-                    const style = window.getComputedStyle(modal);
-                    if (modal.style.display === 'flex' || style.display === 'flex') {
-                        isAnyModalOpen = true;
-                    }
-                });
-
-                if (isAnyModalOpen) {
-                    document.body.classList.add('modal-active');
-                } else {
-                    document.body.classList.remove('modal-active');
-                }
-            });
-
-            // Attach observer to all modals
-            document.querySelectorAll('.modal-backdrop').forEach(el => {
-                modalObserver.observe(el, { attributes: true, attributeFilter: ['style'] });
-            });
-
-            // 3. Shorten Button Text for Mobile
-            if (window.innerWidth <= 768) {
-                const btnRLE = document.getElementById('btn-rle');
-                const btnPat = document.getElementById('btn-pattern');
-                // Preserve badges if they exist
-                const badgeRLE = document.getElementById('badge-rle');
-                const badgePat = document.getElementById('badge-pattern');
-
-                if (btnRLE) {
-                    btnRLE.innerHTML = 'RLE ';
-                    if (badgeRLE) btnRLE.appendChild(badgeRLE);
-                }
-                if (btnPat) {
-                    btnPat.innerHTML = 'Define $ ';
-                    if (badgePat) btnPat.appendChild(badgePat);
-                }
-
-                const allBtns = document.querySelectorAll('.control-panel .action-btn');
-                allBtns.forEach(btn => {
-                    if (btn.innerText.includes('Deconstruct')) btn.innerText = 'Unpack';
-                });
-            }
-        })();
-    </script>
+    <script src="https://cdn.sajed.dev/web/assets/compression-engine.js?version=10"></script>
+    <script src="https://cdn.sajed.dev/web/assets/compression-mobile-styles.js"></script>
 </body>
 
 </html>
