@@ -45,6 +45,23 @@
 
 
     <main>
+        <div class="modal-backdrop" id="saves-modal">
+            <div class="modal">
+                <h2>Load Saved Game</h2>
+                <div id="saves-list"
+                    style="font-family: var(--font-mono); font-size: 0.85rem; max-height: 40vh; overflow-y: auto; margin-bottom: 20px;">
+
+                </div>
+                <div style="display: flex;">
+                    <button class="action-btn" style=" margin-left: 10px; margin-right: 10px;" id="close-saves-btn"
+                        onclick="LZEngine.toggleSaveModal()">Close</button>
+                    <button class="action-btn" style=" margin-left: 10px; margin-right: 10px;"
+                        onclick="LZEngine.clearAllLocalSaves(); LZEngine.toggleSaveModal()">Clear
+                        All</button>
+                </div>
+            </div>
+        </div>
+
         <div class="modal-backdrop" id="share-modal">
             <div class="modal">
                 <h2>Share Solution</h2>
@@ -198,25 +215,37 @@
             </p>
 
             <div class="center" style="margin-top: 20px;">
-                <label for="difficulty-select" style="margin-right: 10px; font-family: var(--font-pixel);">Select
-                    Difficulty:</label>
-                <select id="difficulty-select" class="diff-select">
-                    <option value="daily" selected>Daily Challenge</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                    <option value="expert">Expert</option>
-                </select>
+                <div>
+                    <label for="difficulty-select" style="margin-right: 5px; font-family: var(--font-pixel);">
+                        Select Difficulty:</label>
+                    <select id="difficulty-select" class="diff-select">
+                        <option value="daily" selected>Daily Challenge</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
             </div>
-            <div class="center">
-                <button class="action-btn" id="openNotice">
-                    Data Policy
-                </button>
-                <button class="action-btn" style="border-color:var(--accent-magenta); color:var(--accent-magenta)"
-                    onclick="document.getElementById('game').scrollIntoView({behavior: 'smooth'}); startGame()">
-                    Play
-                </button>
-                <button class="action-btn" id="openInstructions">Instructions</button>
+            <div class="center" style="display:grid; margin-bottom: -7.5%;">
+                <div style="display:inline-block">
+                    <button class="action-btn" id="openNotice">
+                        Data Policy
+                    </button>
+                    <button class="action-btn" style="border-color:var(--accent-magenta); color:var(--accent-magenta)"
+                        onclick="document.getElementById('game').scrollIntoView({behavior: 'smooth'}); startGame()">
+                        Play
+                    </button>
+                    <button class="action-btn" id="openInstructions">Instructions</button>
+
+                </div>
+
+                <div style="display:inline-block; margin-top: 10px;">
+
+                    <button class="action-btn"
+                        style="border-color:var(--accent-green); color:var(--accent-green); width: 200px;"
+                        onclick="LZEngine.toggleSaveModal()">Load Previous Puzzle</button>
+                </div>
             </div>
 
         </section>
@@ -224,14 +253,29 @@
         <section id="game" class="container">
             <div class="game-ui" id="game-interface" style="display:none;">
                 <div class="dashboard-header">
-                    <div class="metric-group" style="margin-right: -7.5%;">
-                        <div class="metric">
-                            <span>Target Cost</span>
-                            <strong id="target-score">00</strong>
+                    <div class="metric-group" style="display: grid; margin-right: -7.5%;">
+                        <div
+                            style="display:flex ; justify-content: space-between; align-items: center; margin-bottom: -7.5%;">
+                            <div class="metric">
+                                <span>Target Cost</span>
+                                <strong id="target-score">00</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Current Cost</span>
+                                <strong id="current-score">00</strong>
+                            </div>
                         </div>
-                        <div class="metric">
-                            <span>Current Cost</span>
-                            <strong id="current-score">00</strong>
+
+                        <div style="display:flex; align-items: center">
+
+                            <button class="action-btn-reduced" id="share-btn" onclick="LZEngine.copyShareLink()"
+                                style="border-color:var(--accent-green); color:var(--accent-green); margin-left: 0%;">
+                                Share</button>
+                            <button class="action-btn-reduced" id="save-btn"
+                                style="border-color:var(--accent-green); color:var(--accent-green);"
+                                onclick="LZEngine.saveGameLocally()">
+                                Save
+                            </button>
                         </div>
                     </div>
 
@@ -239,6 +283,9 @@
                     </div>
 
                     <div class="metric">
+                        <button class="action-btn-reduced" id="reset-btn" onclick="LZEngine.resetGame()">
+                            Reset
+                        </button>
                         <span>Compression</span>
                         <strong id="status-indicator" style="color:var(--accent-green)">??</strong>
                     </div>
