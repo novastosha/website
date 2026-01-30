@@ -26,14 +26,18 @@ async function displayMusic() {
 
         const title = document.createElement("h3");
         title.textContent = song.title;
+        title.style.color = 'var(--accent-magenta)';
+        title.style.fontFamily = 'var(--font-pixel)';
         meta.appendChild(title);
 
         const artist = document.createElement("p");
         artist.textContent = `Artist: ${song.artist}`;
+        artist.style.fontFamily = 'var(--font-mono)';
         meta.appendChild(artist);
 
         const album = document.createElement("p");
         album.textContent = `Album: ${song.album}`;
+        album.style.fontFamily = 'var(--font-mono)';
         meta.appendChild(album);
 
         const links = document.createElement("p");
@@ -42,6 +46,8 @@ async function displayMusic() {
 
             const link = document.createElement("a");
             link.href = url.url;
+            link.style.fontFamily = 'var(--font-pixel)';
+            link.style.textTransform = 'uppercase';
             link.textContent = `[${url.type}]`;
             link.target = "_blank";
             links.appendChild(link);
