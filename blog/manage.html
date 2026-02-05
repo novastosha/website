@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajed // Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/blog/admin-styles.css">
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/hljs-highlighting-scheme.css">
+</head>
+
+<body>
+
+    <div id="auth-view">
+        <h2 style="color: var(--accent-green);">Login</h2>
+        <div style="display: flex; gap: 10px;">
+            <input type="password" id="auth-token" class="form-control" placeholder="Enter Token"
+                style="width: 250px; text-align: center;">
+            <a onclick="handleLogin()" class="btn">Enter</a>
+        </div>
+        <p id="auth-error" style="color: var(--accent-magenta); margin-top: 15px; display: none;">Invalid Token</p>
+    </div>
+
+    <div id="dashboard-view">
+        <header>
+            <div class="brand">sajed.dev <span style="color: var(--text-muted); font-size: 0.8em;">// Admin</span></div>
+            <nav style="display: flex; align-items: center;">
+                <a onclick="renderList()" class="nav-link" href="#">Posts</a>
+                <a onclick="initNewPost()" class="nav-link" href="#">New</a>
+                <a onclick="handleLogout()" class="nav-link" style="color: var(--accent-magenta);" href="#">Logout</a>
+            </nav>
+        </header>
+
+        <div class="workspace">
+            <div id="list-container" class="post-list-grid"></div>
+
+            <div id="editor-wrapper" class="hidden">
+                <div class="editor-header">
+                    <input type="text" id="edit-title" class="form-control" placeholder="Post Title"
+                        style="font-size: 1.2rem; font-family: var(--font-headers); background: transparent; border: none; padding: 0; color: var(--accent-magenta);">
+
+                    <a onclick="openSettings()" class="btn" style="white-space: nowrap;">Settings</a>
+                </div>
+
+                <div class="editor-toolbar">
+                    <button class="tool-btn" onclick="insertMD('**', '**')">B</button>
+                    <button class="tool-btn" onclick="insertMD('*', '*')">I</button>
+                    <button class="tool-btn" onclick="insertMD('### ', '')">H3</button>
+                    <button class="tool-btn" onclick="insertMD('`', '`')">Code</button>
+                    <button class="tool-btn" onclick="insertMD('```\n', '\n```')">Block</button>
+                    <button class="tool-btn" onclick="insertMD('[', '](url)')">Link</button>
+                    <button class="tool-btn" onclick="insertTable()">Table</button>
+                    <div class="separator"></div>
+                    <button class="tool-btn" onclick="undo()">↶</button>
+                    <button class="tool-btn" onclick="redo()">↷</button>
+                    <div class="separator"></div>
+                    <button class="tool-btn" onclick="setLayout('editor')" title="Editor Only">Edit</button>
+                    <button class="tool-btn" onclick="setLayout('split')" title="Split View">Split</button>
+                    <button class="tool-btn" onclick="setLayout('preview')" title="Preview Only">View</button>
+                </div>
+
+                <div class="split-pane" id="split-pane">
+                    <textarea id="editor-content" placeholder="Write markdown content here..."></textarea>
+                    <div id="preview-pane"></div>
+                </div>
+
+                <div class="editor-footer">
+                    <label
+                        style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-right: auto; color: var(--accent-green); font-family: var(--font-headers);">
+                        <input type="checkbox" id="edit-published">
+                        PUBLISHED
+                    </label>
+
+                    <span id="save-status" style="color: var(--text-muted); font-size: 0.9rem;"></span>
+                    <a onclick="deleteCurrentPost()" id="btn-delete" class="btn btn-danger hidden">Delete</a>
+                    <a onclick="saveCurrentPost()" class="btn btn-primary">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal">
+            <h3 style="color: var(--accent-green); margin-top: 0;">Post Configuration</h3>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-headers);">Slug
+                    (URL)</label>
+                <input type="text" id="edit-slug" class="form-control">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-headers);">Cover
+                    Image URL</label>
+                <input type="text" id="edit-image" class="form-control" oninput="updateImagePreview(this.value)">
+                <div id="img-preview"
+                    style="height: 100px; margin-top: 10px; background-size: cover; background-position: center; border: 1px solid var(--border-color);">
+                </div>
+            </div>
+
+            <div style="text-align: right;">
+                <a onclick="closeSettings()" class="btn">Close</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://sajed.dev/assets/blog/blog-management.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sajed.dev // Space</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/blog/admin-styles.css">
+    <link rel="stylesheet" href="https://cdn.sajed.dev/web/assets/hljs-highlighting-scheme.css">
+
+</head>
+
+<body id="top">
+
+    <header class="site-header">
+        <a onclick="showFeed()" class="logo" style="text-transform:lowercase;">sajed.dev</a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="https://sajed.dev/" class="nav-btn">&larr; Main Site</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="blog">
+            <h2 id="blogs-header-display">My blogs</h2>
+
+            <div id="blog-feed" class="grid-feed">
+                <div class="loading-container">
+                    Loading content...
+                </div>
+            </div>
+
+            <div id="blog-reader" style="display: none;">
+                <a onclick="showFeed()" class="btn btn-back">&larr; Return</a>
+
+                <div id="post-meta"></div>
+                <div id="post-body" class="blog-content"></div>
+
+                <div class="comments-section">
+                    <h3>Comments</h3>
+                    <div id="comments-list" style="margin-bottom: 30px;"></div>
+
+                    <div style="background: var(--bg-card); padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                        <h4 style="margin-bottom: 15px; color: var(--text-main);">Leave a message</h4>
+                        <input type="text" id="c-author" class="form-control" placeholder="Name">
+                        <textarea id="c-text" class="form-control" rows="3" placeholder="Message..."></textarea>
+                        <a onclick="postComment()" class="btn">Post Comment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://sajed.dev/assets/blog/blog-index.js"></script>
+
+    <footer class="site-footer">
+        <p class="center" style="max-width: fit-content; margin: 0 auto;">sajed.dev © 2026 <a
+                href="https://git.sajed.dev/website">git.sajed.dev/website</a></p>
+    </footer>
+
+</body>
+
+</html>
