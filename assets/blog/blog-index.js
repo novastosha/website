@@ -112,7 +112,7 @@ async function postComment(event) {
 
     const author = document.getElementById('c-author').value.trim();
     const content = document.getElementById('c-text').value.trim();
-    const turnstileToken = document.querySelector('.cf-turnstile-response') ? document.querySelector('.cf-turnstile-response').value : null;
+    const turnstileToken = document.getElementsByName('cf-turnstile-response')[0]?.value;
 
     if (!author || !content) {
         return;
