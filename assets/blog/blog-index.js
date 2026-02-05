@@ -93,7 +93,7 @@ function renderComments(comments) {
 async function postComment() {
     const author = document.getElementById('c-author').value;
     const content = document.getElementById('c-text').value;
-    const turnstileToken = "0x4AAAAAACYIwRouABoYof-x";
+    const turnstileToken = document.querySelector('.cf-turnstile-response') ? document.querySelector('.cf-turnstile-response').value : null;
 
     if (!author || !content) return;
 
