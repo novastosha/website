@@ -1,3 +1,11 @@
+// Check if URL parameters contain a slug to load
+if (window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('post');
+    if (slug) loadPost(slug);
+}
+
+
 const API = "https://api.sajed.dev/blog";
 let currentSlug = "";
 
