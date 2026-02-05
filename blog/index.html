@@ -61,25 +61,37 @@
                     <h3>Comments</h3>
                     <div id="comments-list" style="margin-bottom: 30px;"></div>
 
-                    <div style="background: var(--bg-card); padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
-                        <h4 style="margin-bottom: 15px; color: var(--text-main);">Leave a message</h4>
-                        <input type="text" id="c-author" class="form-control" placeholder="Name">
-                        <textarea id="c-text" class="form-control" rows="3" placeholder="Message..."></textarea>
+                    <form id="comment-form"
+                        style="background: var(--bg-card); padding: 20px; border: 1px solid rgba(255,255,255,0.1);"
+                        onsubmit="postComment(event)">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+                            <h4 style="margin-bottom: 15px; padding-right: 0; color: var(--text-main);">Leave a comment
+                            </h4>
 
-                        <div style="display: inline-flex">
-                            <a onclick="postComment()"
-                                style="margin-right: 10px">Post Comment</a>
+                            <button id="post-comment-btn" type="submit"
+                                style="margin-right: 10px; background:none; border:none; padding:0; color:var(--accent-magenta); cursor:pointer; font:inherit;">
+                                Post Comment
+                            </button>
+                        </div>
+
+                        <input type="text" id="c-author" name="author" class="form-control" placeholder="Name"
+                            style="margin-top:8px;">
+                        <textarea id="c-text" name="content" class="form-control" rows="3" placeholder="Message..."
+                            style="margin-top:8px;"></textarea>
+
+                        <div style="display: inline-flex; margin-top:10px;">
                             <div id="cf-turnstile" class="cf-turnstile" data-sitekey="0x4AAAAAACYIwRouABoYof-x"
                                 data-theme="dark"></div>
                         </div>
+                    </form>
 
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="https://sajed.dev/assets/blog/blog-index.js"></script>
+    <script src="https://sajed.dev/assets/blog/blog-index.js?version=2"></script>
 
     <footer class="site-footer">
         <p class="center" style="max-width: fit-content; margin: 0 auto;">sajed.dev © 2026 <a

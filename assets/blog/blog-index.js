@@ -1,11 +1,3 @@
-// Check if URL parameters contain a slug to load
-if (window.location.search) {
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('post');
-    if (slug) loadPost(slug);
-}
-
-
 const API = "https://api.sajed.dev/blog";
 let currentSlug = "";
 
@@ -18,7 +10,22 @@ marked.setOptions({
     langPrefix: 'hljs language-'
 });
 
-window.addEventListener('load', () => { fetchPosts(); });
+window.addEventListener('load', () => {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('post');
+
+    if (slug) {
+        loadPost(slug).catch((err) => {
+            console.warn('Failed to load post for slug=', slug, err);
+            // intentionally do nothing visible to user
+            fetchPosts();
+
+        });
+    } else {
+        // no slug -> show feed as normal
+        fetchPosts();
+    }
+});
 
 async function fetchPosts() {
     try {
@@ -98,24 +105,40 @@ function renderComments(comments) {
             `).join('');
 }
 
-async function postComment() {
-    const author = document.getElementById('c-author').value;
-    const content = document.getElementById('c-text').value;
+async function postComment(event) {
+    if (event && event.preventDefault) event.preventDefault();
+
+    if (!currentSlug) return;
+
+    const author = document.getElementById('c-author').value.trim();
+    const content = document.getElementById('c-text').value.trim();
     const turnstileToken = document.querySelector('.cf-turnstile-response') ? document.querySelector('.cf-turnstile-response').value : null;
 
-    if (!author || !content) return;
+    if (!author || !content) {
+        return;
+    }
 
-    const res = await fetch(`${API}/posts/${currentSlug}/comments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ author, content, turnstileToken })
-    });
+    try {
+        const res = await fetch(`${API}/posts/${currentSlug}/comments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ author, content, turnstileToken })
+        });
 
-    if (res.ok) {
-        document.getElementById('c-text').value = '';
-        loadPost(currentSlug);
+        if (res.ok) {
+            // clear the message and re-load comment
+            document.getElementById('c-text').value = '';
+            // reload the current post to refresh comments
+            await loadPost(currentSlug);
+        } else {
+            // failed to post — you can add error handling here if desired
+            console.warn('Failed to post comment', await res.text());
+        }
+    } catch (err) {
+        console.error('Error posting comment', err);
     }
 }
+
 
 function showFeed() {
     document.getElementById('blog-feed').style.display = 'grid';
