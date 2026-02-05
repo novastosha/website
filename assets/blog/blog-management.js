@@ -286,6 +286,6 @@ async function saveCurrentPost() {
 
 async function deleteCurrentPost() {
     if (!currentPostId || !confirm("Delete this post?")) return;
-    const res = await api(`/manage/posts/${currentPostId}`, 'DELETE');
+    const res = await api(`/manage/posts/${currentPostId}/delete`, 'GET');
     if (res.success) renderList();
 }
